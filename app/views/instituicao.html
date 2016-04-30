@@ -1,0 +1,23 @@
+<div>
+	<h1>Instituições</h1>
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th>Sigla</th>
+					<th>Nome</th>
+					<th>Site</th>
+					<th>Tipo</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="instituicao in instituicoes | orderBy: 'sigla'">
+						<td ng-model="intituicao.sigla">{{intituicao.sigla}}</td>
+						<td ng-model="intituicao.nome">{{intituicao.nome}}</td>
+						<td ng-model="intituicao.site">{{intituicao.site}}</td>
+						<td ng-model="intituicao.tipo">{{intituicao.tipo}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
