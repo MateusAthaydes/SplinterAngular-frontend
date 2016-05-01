@@ -8,7 +8,7 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, ngAnimate) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
