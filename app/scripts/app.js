@@ -10,6 +10,7 @@
  */
 angular
   .module('splinterAngularFrontendApp', [
+    'ngAnimate',
     'ngResource',
     'ngRoute'
   ])

@@ -44,7 +44,8 @@
 						<td ng-model="instituicao.sigla">{{instituicao.sigla}}</td>
 						<td ng-model="instituicao.nome">{{instituicao.nome}}</td>
 						<td ng-model="instituicao.site"><a href="{{instituicao.site}}">{{instituicao.site}}</a></td>
-						<td ng-model="instituicao.tipo">{{instituicao.tipo}}</td>
+						<td ng-if="instituicao.privado" ng-model="instituicao.privado">Privado</td>
+						<td ng-if="!instituicao.privado" ng-model="instituicao.privado">Público</td>
 					</tr>
 				</tbody>
 			</table>
