@@ -32,15 +32,33 @@ angular.module('splinterAngularFrontendApp')
 
     $scope.showNewInstitutionForm = function(){
       	$scope.showInstitutions = !$scope.showInstitutions;
+        $scope.editForm = false;
     }
 
     $scope.createNewInstitution = function(){
       var instService = instituicaoService.createNewInstitution($scope.institution)
-      console.log($scope.institution);
       instService.then(function (objSuccess){
         alert("Instituição salva!");
         $window.location.reload();
       }, function(objError){
+        console.log(objError);
+        alert("Ops, houveram problemas.");
+      })
+    }
+
+    $scope.editInstitutionForm = function(institution){
+      $scope.institution = institution;
+      $scope.showInstitutions = false;
+      $scope.editForm = true;
+    }
+
+    $scope.editInstitution = function(){
+      var instService = instituicaoService.editInstitution($scope.institution)
+      instService.then(function (objSuccess){
+        alert("Instituição salva!");
+          $window.location.reload();
+      }, function(objError){
+        console.log(objError);
         alert("Ops, houveram problemas.");
       })
     }

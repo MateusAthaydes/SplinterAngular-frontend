@@ -24,11 +24,12 @@
 			<div class="form-inline">
 				<label for="tipo-institution">Tipo: &nbsp;</label>
 				<select ng-model="institution.privado" name="tipo-institution" class="form-control">
-					<option value="false">Público</option>
-					<option value="true">Privado</option>
+					<option value="false" ng-selected="!institution.privado">Público</option>
+					<option value="true" ng-selected="institution.privado">Privado</option>
 				</select>
 			</div>
-			<button class="pull-right btn btn-success" ng-click="createNewInstitution()">Criar</button>
+			<button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewInstitution()">Criar</button>
+			<button ng-if="editForm" class="pull-right btn btn-success" ng-click="editInstitution()">Salvar</button>
 		</form>
 	</div>
 	<div ng-if="showInstitutions" class="animate-if row">
@@ -39,6 +40,7 @@
 					<th>Nome</th>
 					<th>Site</th>
 					<th>Tipo</th>
+					<th> </th>
 				</thead>
 				<tbody>
 					<tr ng-repeat="instituicao in institutions | orderBy: 'sigla'">
@@ -47,6 +49,10 @@
 						<td ng-model="instituicao.site"><a href="{{instituicao.site}}">{{instituicao.site}}</a></td>
 						<td ng-if="instituicao.privado" ng-model="instituicao.privado">Privado</td>
 						<td ng-if="!instituicao.privado" ng-model="instituicao.privado">Público</td>
+						<td class="table-button">
+							<button class="btn btn-success" ng-click="editInstitutionForm(instituicao)">Editar</button>
+							<button class="btn btn-danger" type="button" name="excluir"> Excluir</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>

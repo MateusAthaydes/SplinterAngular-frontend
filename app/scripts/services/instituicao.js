@@ -8,7 +8,7 @@
  * Service in the splinterAngularFrontendApp.
  */
 angular.module('splinterAngularFrontendApp')
-  .service('instituicaoService', function ($resource, $q, Url) {
+  .service('instituicaoService', function ($resource, $q, $http, Url) {
     return{
     	getInstitutions: function (id, sigla, nome, site, privado){
     		var deferred = $q.defer();
@@ -37,5 +37,18 @@ angular.module('splinterAngularFrontendApp')
           });
         return deferred.promise;
       },
+      editInstitution: function (institution) {
+        var deferred = $q.defer();
+        var resource = Url.EditInstitution + '/' + institution.id;
+        $http.put(resource, institution)
+          .success(function (data, status, headers){
+            return deferred.resolve(data);
+          })
+          .error(function (data, status, headers){
+            return deferred.reject(data);
+          });
+
+          return deferred.promise;
+      }
     }
   });
