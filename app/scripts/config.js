@@ -2,7 +2,7 @@ angular.module('splinterAngularFrontendApp')
 	.factory('Url', function (BaseUrl){
 		return {
 			Institutions: BaseUrl.localApi + '/institutions',
-			EditInstitution: BaseUrl.localApi + '/institution'
+			Institution: BaseUrl.localApi + '/institution'
 		}
 	});
 
@@ -13,4 +13,3 @@ angular.module('splinterAngularFrontendApp')
 			localApi: 'http://localhost:5000'
 		}
 	});
-	

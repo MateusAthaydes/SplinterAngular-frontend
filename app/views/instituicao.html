@@ -1,0 +1,61 @@
+<div ng-init="init()">
+	<div class="row">
+		<h1>Instituições</h1>
+		<button ng-if="!showInstitutions" class="pull-right btn btn-success" ng-click="showNewInstitutionForm()">Todas Instituições</button>
+		<button ng-if="showInstitutions" class="pull-right btn btn-success" ng-click="showNewInstitutionForm()">Nova Instituição</button>
+	</div>
+	&nbsp;
+	<div ng-if="!showInstitutions" class="animate-if row">
+		<form class="form-group row">
+			<div class="col-lg-12 form-inline">
+				<label class="col-lg-2 text-right" for="sigla-institution">Sigla: &nbsp;</label>
+				<input type="text" ng-model="institution.sigla" name="sigla-institution" class="form-control"></input>
+			</div>
+
+			<div class="col-lg-12 form-inline">
+				<label class="col-lg-2 text-right" for="nome-institution">Nome: &nbsp;</label>
+				<input type="text" ng-model="institution.nome" name="nome-institution" class="form-control"></input>
+			</div>
+
+			<div class="col-lg-12 form-inline">
+				<label class="col-lg-2 text-right" for="site-institution">Site: &nbsp;</label>
+				<input type="text" ng-model="institution.site" name="sigla-institution" class="form-control"></input>
+			</div>
+			<div class="col-lg-12 form-inline">
+				<label class="col-lg-2 text-right" for="tipo-institution">Tipo: &nbsp;</label>
+				<select ng-model="institution.privado" name="tipo-institution" class="form-control">
+					<option value="false" ng-selected="!institution.privado">Público</option>
+					<option value="true" ng-selected="institution.privado">Privado</option>
+				</select>
+			</div>
+			<button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewInstitution()">Criar</button>
+			<button ng-if="editForm" class="pull-right btn btn-success" ng-click="editInstitution()">Salvar</button>
+		</form>
+	</div>
+	<div ng-if="showInstitutions" class="animate-if row">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th>Sigla</th>
+					<th>Nome</th>
+					<th>Site</th>
+					<th>Tipo</th>
+					<th> </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="instituicao in institutions | orderBy: 'sigla'">
+						<td ng-model="instituicao.sigla">{{instituicao.sigla}}</td>
+						<td ng-model="instituicao.nome">{{instituicao.nome}}</td>
+						<td ng-model="instituicao.site"><a href="{{instituicao.site}}">{{instituicao.site}}</a></td>
+						<td ng-if="instituicao.privado" ng-model="instituicao.privado">Privado</td>
+						<td ng-if="!instituicao.privado" ng-model="instituicao.privado">Público</td>
+						<td class="table-button">
+							<button class="btn btn-primary-outline" ng-click="editInstitutionForm(instituicao)">Editar</button>
+							<button class="btn btn-danger" ng-click="deleteInstitution(instituicao)"> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

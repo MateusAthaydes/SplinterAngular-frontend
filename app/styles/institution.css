@@ -13,10 +13,14 @@
 }
 
 .table-button {
-  display: inline-flex;
+  display: inherit;
   margin-left: 5px;
 }
 
 .table-button .btn-danger{
   margin-left: 5px;
+}
+
+.form-inline{
+  margin-bottom: 1em;
 }
