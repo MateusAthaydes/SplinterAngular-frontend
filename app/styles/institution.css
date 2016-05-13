@@ -19,3 +19,8 @@
 .form-inline{
   margin-bottom: 1em;
 }
+
+.modal-buttons-footer button{
+  width: 69px;
+  margin-left: 5px; 
+}
