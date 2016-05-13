@@ -12,6 +12,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/simple-sidebar.css">
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/institution.css">
@@ -23,32 +24,28 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">Splinter</a>
-          </div>
-
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-              <li><a ng-href="#/instituicao">Instituições</a></li>
-            </ul>
+            <div id="wrapper">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand"><a ng-href="#/">Splinter</a></li>
+                        <li><a ng-href="#/">Início</a></li>
+                        <li>
+                          <a href="javascript:;" data-toggle="collapse" data-target="#demo"> Cadastros <b class="caret"></b></a>
+                          <ul id="demo" class="collapse">
+                            <li><a ng-href="#/instituicao">Instituições</a></li>
+                            <li><a ng-href="#">Cursos</a></li>
+                            <li><a ng-href="#">Concursos</a></li>
+                          </ul>
+                        </li>
+                        <li><a ng-href="#">Contato</a></li>
+                        <li><a ng-href="#/about">Sobre</a></li>
+                    </ul>
+                </div>
           </div>
         </div>
       </div>
-    </div>
 
     <div class="container">
     <div ng-view=""></div>
