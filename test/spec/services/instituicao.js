@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: instituicao', function () {
+describe('Service: institution', function () {
 
   // load the service's module
   beforeEach(module('splinterAngularFrontendApp'));
 
   // instantiate service
-  var instituicao;
-  beforeEach(inject(function (_instituicao_) {
-    instituicao = _instituicao_;
+  var institution;
+  beforeEach(inject(function (_institution_) {
+    institution = _institution_;
   }));
 
   it('should do something', function () {
-    expect(!!instituicao).toBe(true);
+    expect(!!institution).toBe(true);
   });
 
 });

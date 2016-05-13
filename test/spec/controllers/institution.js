@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: InstituicaoCtrl', function () {
+describe('Controller: InstitutionCtrl', function () {
 
   // load the controller's module
   beforeEach(module('splinterAngularFrontendApp'));
 
-  var InstituicaoCtrl,
+  var InstitutionCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    InstituicaoCtrl = $controller('InstituicaoCtrl', {
+    InstitutionCtrl = $controller('InstitutionCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(InstituicaoCtrl.awesomeThings.length).toBe(3);
+    expect(InstitutionCtrl.awesomeThings.length).toBe(3);
   });
 });

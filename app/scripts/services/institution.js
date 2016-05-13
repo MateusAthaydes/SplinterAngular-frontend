@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc service
- * @name splinterAngularFrontendApp.instituicao
+ * @name splinterAngularFrontendApp.institution
  * @description
- * # instituicao
+ * # institution
  * Service in the splinterAngularFrontendApp.
  */
 angular.module('splinterAngularFrontendApp')
-  .service('instituicaoService', function ($resource, $q, $http, Url) {
+  .service('institutionService', function ($resource, $q, $http, Url) {
     return{
     	getInstitutions: function (id, sigla, nome, site, privado){
     		var deferred = $q.defer();
@@ -39,7 +39,7 @@ angular.module('splinterAngularFrontendApp')
       },
       editInstitution: function (institution) {
         var deferred = $q.defer();
-        var resource = Url.EditInstitution + '/' + institution.id;
+        var resource = Url.Institution + '/' + institution.id;
         $http.put(resource, institution)
           .success(function (data, status, headers){
             return deferred.resolve(data);
@@ -49,6 +49,17 @@ angular.module('splinterAngularFrontendApp')
           });
 
           return deferred.promise;
+      },
+      deleteInstitution: function (institution) {
+        var deferred = $q.defer();
+        var resource = $resource(Url.Institution + '/' + institution.id);
+        resource.delete(institution,
+          function (data){
+            return data.$resolved;
+          }, function (response){
+            return deferred.reject(response);
+          });
+
       }
     }
   });

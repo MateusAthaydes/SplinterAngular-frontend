@@ -12,11 +12,6 @@
   opacity:1;
 }
 
-.table-button {
-  display: inherit;
-  margin-left: 5px;
-}
-
 .table-button .btn-danger{
   margin-left: 5px;
 }
