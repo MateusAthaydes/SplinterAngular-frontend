@@ -27,10 +27,15 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/instituicao', {
+      .when('/instituicoes', {
         templateUrl: 'views/institution.html',
         controller: 'InstitutionCtrl',
         controllerAs: 'institution'
+      })
+      .when('/cursos', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl',
+        controllerAs: 'course'
       })
       .otherwise({
         redirectTo: '/'

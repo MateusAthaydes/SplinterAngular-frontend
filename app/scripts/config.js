@@ -2,7 +2,9 @@ angular.module('splinterAngularFrontendApp')
 	.factory('Url', function (BaseUrl){
 		return {
 			Institutions: BaseUrl.localApi + '/institutions',
-			Institution: BaseUrl.localApi + '/institution'
+			Institution: BaseUrl.localApi + '/institution',
+			Courses: BaseUrl.localApi + '/courses',
+			Course: BaseUrl.localApi + '/course'
 		}
 	});
 

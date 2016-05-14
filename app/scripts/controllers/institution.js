@@ -21,7 +21,6 @@ angular.module('splinterAngularFrontendApp')
     $scope.institutions = [];
 
     $scope.init = function(){
-    	$scope.showInstitutions = true;
     	var instService = institutionService.getInstitutions($scope.institution.id,
                                             $scope.institution.sigla, $scope.institution.nome,
                                             $scope.institution.site, $scope.institution.privado);
@@ -30,16 +29,9 @@ angular.module('splinterAngularFrontendApp')
     	});
     }
 
-
-    $scope.showNewInstitutionForm = function(){
-      	$scope.showInstitutions = !$scope.showInstitutions;
-        $scope.institution.privado = false;
-
-    }
-
     $scope.createNewInstitution = function(){
       console.log($scope.institution);
-      var instService = institutionService.createNewInstitution($scope.institution)
+      var instService = institutionService.createNewInstitution($scope.institution);
       instService.then(function (objSuccess){
         $scope.institutionModal.close();
         $window.location.reload();
@@ -49,13 +41,8 @@ angular.module('splinterAngularFrontendApp')
       })
     }
 
-    $scope.editInstitutionForm = function(institution){
-      $scope.institution = institution;
-      $scope.editForm = true;
-    }
-
     $scope.editInstitution = function(){
-      var instService = institutionService.editInstitution($scope.institution)
+      var instService = institutionService.editInstitution($scope.institution);
       instService.then(function (objSuccess){
         $scope.institutionModal.close();
       }, function(objError){
