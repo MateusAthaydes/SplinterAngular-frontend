@@ -1,27 +1,35 @@
 <div ng-init="init()">
 	<div class="row">
 		<h1>Instituições</h1>
-		<button class="pull-right btn btn-success" ng-click="createEditInstitutionModal()">Nova Instituição</button>
 	</div>
 	&nbsp;
 
-	<div ng-if="showInstitutions" class="animate-if row">
+	<div class="row">
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-11">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+					<div class="pull-right col-lg-1">
+						<button class="btn btn-success" ng-click="createEditInstitutionModal()">Nova Instituição</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<br />
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
-					<th class="col-md-1">Sigla</th>
-					<th class="col-md-4">Nome</th>
-					<th class="col-md-2">Site</th>
-					<th class="col-2d-2">Tipo</th>
+					<th class="col-md-2">Sigla</th>
+					<th class="col-md-7">Nome</th>
 					<th class="col-md-3"> </th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="instituicao in institutions | orderBy: 'sigla'">
+					<tr ng-repeat="instituicao in institutions | orderBy: 'sigla' | filter:filterText">
 						<td ng-model="instituicao.sigla">{{instituicao.sigla}}</td>
 						<td ng-model="instituicao.nome">{{instituicao.nome}}</td>
-						<td ng-model="instituicao.site"><a href="{{instituicao.site}}">{{instituicao.site}}</a></td>
-						<td ng-if="instituicao.privado" ng-model="instituicao.privado">Privado</td>
-						<td ng-if="!instituicao.privado" ng-model="instituicao.privado">Público</td>
 						<td class="table-button">
 								<button class="btn btn-primary" ng-click="createEditInstitutionModal(instituicao)">Editar</button>
 								<button class="btn btn-danger" ng-click="openConfirmationModal(instituicao)"> Excluir</button>

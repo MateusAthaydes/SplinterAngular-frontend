@@ -1,4 +1,4 @@
-.animate-if.ng-enter, .animate-if.ng-leave {
+.animate-if.ng-enter, .animate-if.ng-leave {g
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 }
 
@@ -22,5 +22,9 @@
 
 .modal-buttons-footer button{
   width: 69px;
-  margin-left: 5px; 
+  margin-left: 5px;
+}
+
+.form-inline .form-group .filter-input input{
+  width: 386px;
 }
