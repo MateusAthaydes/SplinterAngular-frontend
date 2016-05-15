@@ -22,14 +22,11 @@ angular.module('splinterAngularFrontendApp')
     $scope.subjectScoreCollapsed = true;
 
     $scope.init = function(){
-      console.log($scope.institution);
       var instService = institutionService.getInstitution($scope.institution.id,
                                             $scope.institution.sigla, $scope.institution.nome,
                                             $scope.institution.site, $scope.institution.privado);
     	instService.then(function (institutionResponse){
-          console.log(institutionResponse);
 			     $scope.institution = institutionResponse;
     	});
-
     }
   });

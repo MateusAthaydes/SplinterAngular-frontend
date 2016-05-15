@@ -1,0 +1,50 @@
+<div ng-init="init()">
+  <div class="row">
+    <h1>Concursos</h1>
+  </div>
+  &nbsp;
+
+  <div class="row">
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-11">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+					<div class="pull-right col-lg-1">
+						<button class="btn btn-success" ng-click="createEditInstitutionModal()">Nova Instituição</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<br />
+
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<th class="col-md-1"> </th>
+          <th class="col-md-4">Nome</th>
+  				<th class="col-md-1">Ano</th>
+          <th class="col-md-1">Semestre</th>
+					<th class="col-md-2">Instituição</th>
+          <th class="col-md-3"> </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="examination in examinations | orderBy: 'ano' | filter:filterText">
+						<td> <a href="#/instituicao/detalhe/{{examination.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
+            <td ng-model="examination.nome">{{examination.nome}}</td>
+            <td ng-model="examination.ano">{{examination.ano}}</td>
+						<td ng-model="examination.semestre">{{examination.semestre}}</td>
+            <td ng-model="institution.sigla">{{institution.sigla}}</td>
+						<td class="table-button">
+								<button class="btn btn-primary" ng-click="createEditInstitutionModal(institution)">Editar</button>
+								<button class="btn btn-danger" ng-click="openConfirmationModal(institution)"> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
