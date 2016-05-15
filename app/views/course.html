@@ -1,0 +1,40 @@
+<div ng-init="init()">
+	<div class="row">
+		<h1>Cursos</h1>
+	</div>
+	&nbsp;
+
+	<div class="row">
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-11">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+					<div class="pull-right col-lg-1">
+						<button class="btn btn-success" ng-click="createEditCourseModal()">Novo Curso</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<br />
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th class="col-md-9">Nome</th>
+					<th class="col-md-3"> </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="course in courses | orderBy: 'nome' | filter:filterText">
+						<td ng-model="course.nome">{{course.nome}}</td>
+						<td class="table-button">
+								<button class="btn btn-primary" ng-click="createEditCourseModal(course)">Editar</button>
+								<button class="btn btn-danger" ng-click="openConfirmationModal(course)"> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -27,7 +27,7 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/instituicao', {
+      .when('/instituicoes', {
         templateUrl: 'views/institution.html',
         controller: 'InstitutionCtrl',
         controllerAs: 'institution'
@@ -36,6 +36,16 @@ angular
         templateUrl: 'views/institution_detail.html',
         controller: 'InstitutiondetailCtrl',
         controllerAs: 'institutiondetail'
+      })
+      .when('/cursos', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl',
+        controllerAs: 'course'
+      })
+      .when('/areas', {
+        templateUrl: 'views/subject.html',
+        controller: 'SubjectCtrl',
+        controllerAs: 'subject'
       })
       .otherwise({
         redirectTo: '/'

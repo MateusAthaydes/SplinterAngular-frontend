@@ -21,20 +21,12 @@ angular.module('splinterAngularFrontendApp')
     $scope.institutions = [];
 
     $scope.init = function(){
-    	$scope.showInstitutions = true;
     	var instService = institutionService.getInstitutions($scope.institution.id,
                                             $scope.institution.sigla, $scope.institution.nome,
                                             $scope.institution.site, $scope.institution.privado);
     	instService.then(function (institutionResponse){
 			     $scope.institutions = institutionResponse.institutions;
     	});
-    }
-
-
-    $scope.showNewInstitutionForm = function(){
-      	$scope.showInstitutions = !$scope.showInstitutions;
-        $scope.institution.privado = false;
-
     }
 
     $scope.createNewInstitution = function(){
@@ -48,13 +40,8 @@ angular.module('splinterAngularFrontendApp')
       })
     }
 
-    $scope.editInstitutionForm = function(institution){
-      $scope.institution = institution;
-      $scope.editForm = true;
-    }
-
     $scope.editInstitution = function(){
-      var instService = institutionService.editInstitution($scope.institution)
+      var instService = institutionService.editInstitution($scope.institution);
       instService.then(function (objSuccess){
         $scope.institutionModal.close();
       }, function(objError){
@@ -64,7 +51,6 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.deleteInstitution = function(institution){
-      console.log(institution);
       var instService = institutionService.deleteInstitution(institution);
       $window.location.reload();
     }
