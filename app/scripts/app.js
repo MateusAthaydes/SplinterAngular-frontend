@@ -47,6 +47,11 @@ angular
         controller: 'SubjectCtrl',
         controllerAs: 'subject'
       })
+      .when('/usuarios', {
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
+      })
       .otherwise({
         redirectTo: '/'
       });

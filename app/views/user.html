@@ -1,0 +1,42 @@
+<div ng-init="init()">
+	<div class="row">
+		<h1>Usuários</h1>
+	</div>
+	&nbsp;
+
+	<div class="row">
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-11">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+					<div class="pull-right col-lg-1">
+						<button class="btn btn-success" ng-click="createEditUserModal()">Novo Usuário</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<br />
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th class="col-md-4">Nome</th>
+					<th class="col-md-5">Email</th>
+					<th class="col-md-3"> </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in users | orderBy: 'nome' | filter:filterText">
+						<td ng-model="user.nome">{{user.nome}}</td>
+						<td ng-model="user.email">{{user.email}}</td>
+						<td class="table-button">
+								<button class="btn btn-primary" ng-click="createEditUserModal(user)">Editar</button>
+								<button class="btn btn-danger" ng-click="openConfirmationModal(user)"> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
