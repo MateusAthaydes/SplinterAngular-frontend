@@ -22,11 +22,13 @@
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
-					<th class="col-md-9">Nome</th>
+					<th class="col-md-1"> </th>
+					<th class="col-md-8">Nome</th>
 					<th class="col-md-3"> </th>
 				</thead>
 				<tbody>
 					<tr ng-repeat="course in courses | orderBy: 'nome' | filter:filterText">
+						<td> <a href="#/curso/detalhe/{{course.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
 						<td ng-model="course.nome">{{course.nome}}</td>
 						<td class="table-button">
 								<button class="btn btn-primary" ng-click="createEditCourseModal(course)">Editar</button>

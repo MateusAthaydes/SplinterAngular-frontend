@@ -42,6 +42,11 @@ angular
         controller: 'CourseCtrl',
         controllerAs: 'course'
       })
+      .when('/curso/detalhe/:id', {
+        templateUrl: 'views/course_detail.html',
+        controller: 'CoursedetailCtrl',
+        controllerAs: 'coursedetail'
+      })
       .when('/areas', {
         templateUrl: 'views/subject.html',
         controller: 'SubjectCtrl',

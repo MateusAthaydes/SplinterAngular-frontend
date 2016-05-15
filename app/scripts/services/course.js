@@ -58,6 +58,20 @@ angular.module('splinterAngularFrontendApp')
             return deferred.reject(response);
           });
 
+      },
+      getCourse: function (id, nome, descricao){
+        var deferred = $q.defer();
+        var resource = $resource(Url.Course + '/' + id);
+        resource.get({
+                id: id,
+    			nome: nome,
+    			descricao: descricao
+        }, function (data){
+    			return deferred.resolve(data);
+    		}, function (response){
+    			return deferred.reject(response);
+        });
+        return deferred.promise;
       }
     }
   });
