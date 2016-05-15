@@ -20,19 +20,21 @@
 		</div>
 		<br />
 		<div class="table-responsive">
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
+					<th class="col-md-1"> </th>
 					<th class="col-md-2">Sigla</th>
-					<th class="col-md-7">Nome</th>
+					<th class="col-md-6">Nome</th>
 					<th class="col-md-3"> </th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="instituicao in institutions | orderBy: 'sigla' | filter:filterText">
-						<td ng-model="instituicao.sigla">{{instituicao.sigla}}</td>
-						<td ng-model="instituicao.nome">{{instituicao.nome}}</td>
+					<tr ng-repeat="institution in institutions | orderBy: 'sigla' | filter:filterText">
+						<td> <a href="#/instituicao/detalhe/{{institution.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
+						<td ng-model="institution.sigla">{{institution.sigla}}</td>
+						<td ng-model="institution.nome">{{institution.nome}}</td>
 						<td class="table-button">
-								<button class="btn btn-primary" ng-click="createEditInstitutionModal(instituicao)">Editar</button>
-								<button class="btn btn-danger" ng-click="openConfirmationModal(instituicao)"> Excluir</button>
+								<button class="btn btn-primary" ng-click="createEditInstitutionModal(institution)">Editar</button>
+								<button class="btn btn-danger" ng-click="openConfirmationModal(institution)"> Excluir</button>
 						</td>
 					</tr>
 				</tbody>

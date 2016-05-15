@@ -26,7 +26,7 @@ angular.module('splinterAngularFrontendApp')
                                             $scope.institution.sigla, $scope.institution.nome,
                                             $scope.institution.site, $scope.institution.privado);
     	instService.then(function (institutionResponse){
-			$scope.institutions = institutionResponse.institutions;
+			     $scope.institutions = institutionResponse.institutions;
     	});
     }
 
@@ -38,7 +38,6 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.createNewInstitution = function(){
-      console.log($scope.institution);
       var instService = institutionService.createNewInstitution($scope.institution)
       instService.then(function (objSuccess){
         $scope.institutionModal.close();

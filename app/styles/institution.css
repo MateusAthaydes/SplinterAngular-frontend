@@ -28,3 +28,11 @@
 .form-inline .form-group .filter-input input{
   width: 386px;
 }
+
+.institution-info .form-group .form-inline input .nome-disabled{
+    width: 430px;
+}
+
+.collapse-icon{
+  font-size: 20px;  
+}

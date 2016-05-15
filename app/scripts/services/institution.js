@@ -59,7 +59,23 @@ angular.module('splinterAngularFrontendApp')
           }, function (response){
             return deferred.reject(response);
           });
-
+      },
+      getInstitution: function (id, sigla, nome, site, privado){
+        var deferred = $q.defer();
+        var resource = $resource(Url.Institution + '/' + id);
+        resource.get({
+          id: id,
+    			sigla: sigla,
+    			nome: nome,
+    			site: site,
+    			privado: privado
+        }, function (data){
+          console.log(deferred.resolve(data));
+    			return deferred.resolve(data);
+    		}, function (response){
+    			return deferred.reject(response);
+        });
+        return deferred.promise;
       }
     }
   });

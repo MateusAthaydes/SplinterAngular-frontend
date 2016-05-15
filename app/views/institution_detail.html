@@ -1,0 +1,49 @@
+<div ng-init="init()">
+  <div class="">
+    <h1>{{institution.sigla}} - Detalhe</h1>
+  </div>
+  &nbsp;
+
+  <div class="institution-info">
+    <form class="form-group row">
+      <div class="form-inline">
+        <div class="col-lg-3">
+          <label class="text-right" for="sigla-institution">Sigla: &nbsp;</label>
+          <span>{{institution.sigla}}</span>
+        </div>
+
+        <div class="col-lg-9 form-inline">
+          <label class="col-lg-2 text-right" for="nome-institution">Nome: &nbsp;</label>
+          <span>{{institution.nome}}</span>
+        </div>
+      </div>
+
+      <div class="form-inline">
+        <div class="col-lg-3">
+          <label class="text-right" for="tipo-institution">Tipo: &nbsp;</label>
+          <span ng-if="institution.privado">Privado</span>
+          <span ng-if="!institution.privado">Público</span>
+        </div>
+        <div class="col-lg-9 form-inline">
+          <label class="col-lg-2 text-right" for="site-institution">Site: &nbsp;</label>
+          <a href="{{institution.site}}" target="_blank">{{institution.site}}</a>
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="">
+      <i ng-click="examinationCollapsed = !examinationCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Concursos</span></i><hr>
+      <div uib-collapse="examinationCollapsed">
+        <div class="well well-lg">
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <i ng-click="coursesCollapsed = !coursesCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Cursos</span></i><hr>
+      <div uib-collapse="coursesCollapsed">
+		      <div class="well well-lg">Some content</div>
+	    </div>
+    </div>
+    <br />
+  </div>
+</div>
