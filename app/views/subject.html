@@ -1,0 +1,40 @@
+<div ng-init="init()">
+	<div class="row">
+		<h1>Áreas de Conhecimento</h1>
+	</div>
+	&nbsp;
+
+	<div class="row">
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-11">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+					<div class="pull-right col-lg-1">
+						<button class="btn btn-success" ng-click="createEditSubjectModal()">Nova Área</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<br />
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th class="col-md-9">Nome</th>
+					<th class="col-md-3"> </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="subject in subjects | orderBy: 'nome' | filter:filterText">
+						<td ng-model="subject.nome">{{subject.nome}}</td>
+						<td class="table-button">
+								<button class="btn btn-primary" ng-click="createEditSubjectModal(subject)">Editar</button>
+								<button class="btn btn-danger" ng-click="openConfirmationModal(subject)"> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

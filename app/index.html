@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/institution.css">
     <link rel="stylesheet" href="styles/course.css">
+    <link rel="stylesheet" href="styles/subject.css">
     <!-- endbuild -->
   </head>
   <body ng-app="splinterAngularFrontendApp">
@@ -31,8 +32,9 @@
                         <li>
                           <a href="javascript:;" data-toggle="collapse" data-target="#demo"> Cadastros <b class="caret"></b></a>
                           <ul id="demo" class="collapse">
-                            <li><a ng-href="#/instituicoes">Instituições</a></li>
+                            <li><a ng-href="#/areas">Áreas de Conhecimento</a></li>
                             <li><a ng-href="#/cursos">Cursos</a></li>
+                            <li><a ng-href="#/instituicoes">Instituições</a></li>
                             <li><a ng-href="#">Concursos</a></li>
                           </ul>
                         </li>
@@ -79,9 +81,11 @@
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/institution.js"></script>
     <script src="scripts/controllers/course.js"></script>
+    <script src="scripts/controllers/subject.js"></script>
     <!-- services -->
     <script src="scripts/services/institution.js"></script>
     <script src="scripts/services/course.js"></script>
+    <script src="scripts/services/subject.js"></script>
     <!-- endbuild -->
 </body>
 </html>
