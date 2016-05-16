@@ -52,6 +52,11 @@ angular
         controller: 'ExaminationCtrl',
         controllerAs: 'examination'
       })
+      .when('/concurso/detalhe/:id', {
+        templateUrl: 'views/examination_detail.html',
+        controller: 'ExaminationdetailCtrl',
+        controllerAs: 'examinationdetail'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -10,12 +10,12 @@
 angular.module('splinterAngularFrontendApp')
   .service('examinationService', function ($resource, $q, $http, Url) {
     return{
-      getExaminations: function (id, id_instituicao_ensino, nome, ano, semestre, data_inicio, duracao){
+      getExaminations: function (id, instituicao, nome, ano, semestre, data_inicio, duracao){
         var deferred = $q.defer();
         var resource = $resource(Url.Examinations);
         resource.get({
           id: id,
-          id_instituicao_ensino: id_instituicao_ensino,
+          instituicao: instituicao,
           nome: nome,
           ano: ano,
           semestre: semestre,
@@ -25,6 +25,24 @@ angular.module('splinterAngularFrontendApp')
           return deferred.resolve(data);
         }, function (response){
           return deferred.reject(response);
+        });
+        return deferred.promise;
+      },
+      getExamination: function (id, instituicao, nome, ano, semestre, data_inicio, duracao){
+        var deferred = $q.defer();
+        var resource = $resource(Url.Examination + '/' + id);
+        resource.get({
+          id: id,
+          instituicao: instituicao,
+          nome: nome,
+          ano: ano,
+          semestre: semestre,
+          data_inicio: data_inicio,
+          duracao: duracao
+        }, function (data){
+    			return deferred.resolve(data);
+    		}, function (response){
+    			return deferred.reject(response);
         });
         return deferred.promise;
       }
