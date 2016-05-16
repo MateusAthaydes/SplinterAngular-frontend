@@ -20,7 +20,7 @@ angular.module('splinterAngularFrontendApp')
       duracao: null
    }
 
-    $scope.questionsCollapsed = true;
+    $scope.questionsCollapsed = false;
     $scope.subjectCollapsed = true;
     $scope.init = function(){
       var examService = examinationService.getExamination($scope.examination.id,
