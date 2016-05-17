@@ -1,0 +1,60 @@
+<div ng-init="init()">
+  <div class="">
+    <h1>{{examination.nome}} - Detalhe</h1>
+  </div>
+  &nbsp;
+
+  <div class="institution-info">
+    <form class="form-group row">
+      <div class="form-inline">
+        <div class="col-lg-7">
+          <label class="text-right">Nome: &nbsp;</label>
+          <span>{{examination.nome}}</span>
+        </div>
+
+        <div class="col-lg-5 form-inline">
+          <label class="text-right">Ano: &nbsp;</label>
+          <span>{{examination.ano}}</span>
+        </div>
+      </div>
+      <div class="form-inline">
+        <div class="col-lg-7">
+          <label class="text-right">Semestre: &nbsp;</label>
+          <span>{{examination.semestre}}</span>
+        </div>
+        <div class="col-lg-5">
+          <label>Duração: </label>
+          <span>{{examination.duracao}} dias</span>
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="">
+      <i ng-click="questionsCollapsed = !questionsCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Questões</span></i>
+      <button type="button" class="btn btn-success btn-collapse" name="button" ng-click="createEditQuestionModal()">Nova Questão</button>
+      <hr>
+      <div uib-collapse="questionsCollapsed">
+        <div class="well-lg">
+          <div ng-repeat="questionBySubject in questionsToFilter() | filter:groupQuestionBySubject">
+            <i ng-click="subjectCollapsed = !subjectCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> {{questionBySubject.area_conhecimento.nome}}</span></i><hr>
+            <div uib-collapse="subjectCollapsed">
+              <div class="well-lg" ng-init="questionList = questionsBySubjectGroup(questionBySubject)">
+                <div ng-repeat="question in questionList">
+                  <div class="well">
+                    <label>Questão: </label>
+                    <span>{{question.descricao}}</span>
+                    <!-- <td class="table-button">
+        								<button class="btn btn-primary pull-right" ng-click="createEditQuestionModal(question)">Editar</button>
+        								<button class="btn btn-danger pull-right" ng-click=""> Excluir</button>
+        						</td> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>

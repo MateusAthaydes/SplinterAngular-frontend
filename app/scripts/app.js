@@ -52,6 +52,16 @@ angular
         controller: 'SubjectCtrl',
         controllerAs: 'subject'
       })
+      .when('/concursos', {
+        templateUrl: 'views/examination.html',
+        controller: 'ExaminationCtrl',
+        controllerAs: 'examination'
+      })
+      .when('/concurso/detalhe/:id', {
+        templateUrl: 'views/examination_detail.html',
+        controller: 'ExaminationdetailCtrl',
+        controllerAs: 'examinationdetail'
+      })
       .when('/usuarios', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',

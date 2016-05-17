@@ -29,7 +29,6 @@ angular.module('splinterAngularFrontendApp')
     	instService.then(function (institutionResponse){
 			     $scope.institution = institutionResponse;
     	});
-
     }
 
     $scope.editInstitution = function(){
@@ -55,7 +54,7 @@ angular.module('splinterAngularFrontendApp')
     //     $scope.editForm = true;
     //     $scope.modalTitle = "Editar Instituição";
     //   } else {
-    //     $scope.institution = {};
+      //     $scope.institution = {};
     //     $scope.editForm = false;
     //     $scope.institution.privado = false;
     //     $scope.modalTitle = "Nova Instituição";
@@ -98,7 +97,4 @@ angular.module('splinterAngularFrontendApp')
     $scope.closeConfirmationModal = function(){
         $scope.confirmationModal.dismiss('cancel');
     }
-
-
-
   });

@@ -14,7 +14,7 @@ angular.module('splinterAngularFrontendApp')
     		var deferred = $q.defer();
     		var resource = $resource(Url.Institutions);
     		resource.get({
-                id: id,
+          id: id,
     			sigla: sigla,
     			nome: nome,
     			site: site,
