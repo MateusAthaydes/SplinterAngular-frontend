@@ -25,7 +25,7 @@ angular.module('splinterAngularFrontendApp')
     			return deferred.reject(response);
     		});
     		return deferred.promise;
-    	},
+      },
       createNewInstitution: function (institution){
         var deferred = $q.defer();
         var resource = $resource(Url.Institutions);
@@ -75,6 +75,6 @@ angular.module('splinterAngularFrontendApp')
     			return deferred.reject(response);
         });
         return deferred.promise;
-      }
     }
-  });
+  }
+});

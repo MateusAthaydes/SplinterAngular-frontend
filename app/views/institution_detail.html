@@ -31,17 +31,66 @@
       </div>
     </form>
     <br />
-    <div class="">
-      <i ng-click="examinationCollapsed = !examinationCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Concursos</span></i><hr>
+    <div  class="col-lg-12">
+      <div class="col-lg-4">
+        <i ng-click="examinationCollapsed = !examinationCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Concursos</span></i>
+      </div>
+      <button class="btn btn-success btn-collapse" ng-click="">Novo Concurso</button>
+      <br />
+      <hr>
       <div uib-collapse="examinationCollapsed">
         <div class="well well-lg">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <th class="col-md-1"> </th>
+                <th class="col-md-3">Nome</th>
+                <th class="col-md-1">Ano</th>
+                <th class="col-md-1">Semestre</th>
+                <th class="col-md-2">Data</th>
+                <th class="col-md-1"></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="examination in institution.concursos | orderBy: 'data_inicio'">
+                  <td> <a href="#/concurso/detalhe/{{examination.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
+                  <td ng-model="examination.nome">{{examination.nome}}</td>
+                  <td ng-model="examination.ano">{{examination.ano}}</td>
+                  <td ng-model="examination.semestre">{{examination.semestre}}</td>
+                  <td ng-model="examination.data_inicio">{{examination.data_inicio}}</td>
+                  <td align="right"><i ng-click="openConfirmationModal('course', course)" class="glyphicon glyphicon-trash" rel="tooltip" title="Remover o vínculo entre o curso de {{course.nome}} e a instituição {{institution.sigla}}."/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-    <div class="">
-      <i ng-click="coursesCollapsed = !coursesCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Cursos</span></i><hr>
+    <div class="col-lg-12">
+      <div class="col-lg-4">
+        <i ng-click="coursesCollapsed = !coursesCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Cursos</span></i>
+      </div>
+      <button class="btn btn-success btn-collapse" ng-click="">Novo Curso</button>
+      <br />
+      <hr>
       <div uib-collapse="coursesCollapsed">
-		      <div class="well well-lg">Some content</div>
+        <div class="well well-lg">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <th class="col-md-1"> </th>
+                <th class="col-md-7">Nome</th>
+                <th class="col-md-1"></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="course in institution.cursos | orderBy: 'nome'">
+                  <td> <a href="#/curso/detalhe/{{course.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
+                  <td ng-model="course.nome">{{course.nome}}</td>
+                  <td align="right"><i ng-click="openConfirmationModal('course', course)" class="glyphicon glyphicon-trash" rel="tooltip" title="Remover o vínculo entre o curso de {{course.nome}} e a instituição {{institution.sigla}}."/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 	    </div>
     </div>
     <br />
