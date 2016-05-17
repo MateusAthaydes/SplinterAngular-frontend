@@ -2,21 +2,24 @@
 
 /**
  * @ngdoc service
- * @name splinterAngularFrontendApp.course
+ * @name splinterAngularFrontendApp.user
  * @description
- * # course
+ * # user
  * Service in the splinterAngularFrontendApp.
  */
 angular.module('splinterAngularFrontendApp')
-  .service('courseService', function ($resource, $q, $http, Url) {
+  .service('userService', function ($resource, $q, $http, Url) {
     return{
-    	getCourses: function (id, nome, descricao){
+    	getUsers: function (id, nome, email, senha, is_admin, data_cadastro){
     		var deferred = $q.defer();
-    		var resource = $resource(Url.Courses);
+    		var resource = $resource(Url.Users);
     		resource.get({
                 id: id,
     			nome: nome,
-    			descricao: descricao
+    			email: email,
+    			senha: senha,
+    			is_admin: is_admin,
+                data_cadastro: data_cadastro
     		},function (data){
     			return deferred.resolve(data);
     		}, function (response){
@@ -24,10 +27,11 @@ angular.module('splinterAngularFrontendApp')
     		});
     		return deferred.promise;
     	},
-      createNewCourse: function (course){
+      createNewUser: function (user){
+        user.senha = btoa(user.senha);
         var deferred = $q.defer();
-        var resource = $resource(Url.Courses);
-        resource.save(course,
+        var resource = $resource(Url.Users);
+        resource.save(user,
           function (data){
             return deferred.resolve(data);
           }, function (response){
@@ -35,10 +39,10 @@ angular.module('splinterAngularFrontendApp')
           });
         return deferred.promise;
       },
-      editCourse: function (course) {
+      editUser: function (user) {
         var deferred = $q.defer();
-        var resource = Url.Course + '/' + course.id;
-        $http.put(resource, course)
+        var resource = Url.User + '/' + user.id;
+        $http.put(resource, user)
           .success(function (data, status, headers){
             return deferred.resolve(data);
           })
@@ -48,30 +52,16 @@ angular.module('splinterAngularFrontendApp')
 
           return deferred.promise;
       },
-      deleteCourse: function (course) {
+      deleteUser: function (user) {
         var deferred = $q.defer();
-        var resource = $resource(Url.Course + '/' + course.id);
-        resource.delete(course,
+        var resource = $resource(Url.User + '/' + user.id);
+        resource.delete(user,
           function (data){
             return data.$resolved;
           }, function (response){
             return deferred.reject(response);
           });
 
-      },
-      getCourse: function (id, nome, descricao){
-        var deferred = $q.defer();
-        var resource = $resource(Url.Course + '/' + id);
-        resource.get({
-                id: id,
-    			nome: nome,
-    			descricao: descricao
-        }, function (data){
-    			return deferred.resolve(data);
-    		}, function (response){
-    			return deferred.reject(response);
-        });
-        return deferred.promise;
       }
     }
   });

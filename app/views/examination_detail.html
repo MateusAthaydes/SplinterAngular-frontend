@@ -30,7 +30,9 @@
     </form>
     <br />
     <div class="">
-      <i ng-click="questionsCollapsed = !questionsCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Questões</span></i><hr>
+      <i ng-click="questionsCollapsed = !questionsCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Questões</span></i>
+      <button type="button" class="btn btn-success btn-collapse" name="button" ng-click="createEditQuestionModal()">Nova Questão</button>
+      <hr>
       <div uib-collapse="questionsCollapsed">
         <div class="well-lg">
           <div ng-repeat="questionBySubject in questionsToFilter() | filter:groupQuestionBySubject">
@@ -41,6 +43,10 @@
                   <div class="well">
                     <label>Questão: </label>
                     <span>{{question.descricao}}</span>
+                    <!-- <td class="table-button">
+        								<button class="btn btn-primary pull-right" ng-click="createEditQuestionModal(question)">Editar</button>
+        								<button class="btn btn-danger pull-right" ng-click=""> Excluir</button>
+        						</td> -->
                   </div>
                 </div>
               </div>

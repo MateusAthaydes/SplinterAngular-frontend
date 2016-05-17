@@ -8,16 +8,21 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('ExaminationdetailCtrl', function ($scope, $routeParams, examinationService) {
+  .controller('ExaminationdetailCtrl', function ($scope, $routeParams, $window, $uibModal, examinationService, subjectService, questionService) {
     $scope.examination = {
       id: $routeParams.id,
       instituicao:  null,
-      question: [],
+      questions: [],
       nome: null,
       ano: null,
       semestre: null,
       data_inicio: null,
       duracao: null
+   }
+
+   $scope.subject = {
+       id: null,
+       nome: null
    }
 
     $scope.questionsCollapsed = false;
@@ -52,6 +57,57 @@ angular.module('splinterAngularFrontendApp')
           }
         });
         return questionsBySubjectList;
+      }
+
+      $scope.createNewQuestion = function(){
+        $scope.newQuestion = {
+          descricao: $scope.question.descricao,
+          id_area_conhecimento: $scope.question.area_conhecimento.id,
+          id_concurso: $scope.examination.id
+        }
+        var questService = questionService.createNewQuestion($scope.newQuestion)
+        console.log($scope.newQuestion);
+        questService.then(function (objSuccess){
+          $scope.questionModal.close();
+          $window.location.reload();
+        }, function(objError){
+          console.log(objError);
+          alert("Ops, houveram problemas.");
+        })
+      }
+
+      /*
+      ----------------------------------------------------------------------------
+      Modal configuration
+      create and edit modal;
+      confirmation modal;
+      */
+
+      $scope.createEditQuestionModal = function(question){
+        if (question){
+          $scope.question = question;
+          $scope.editForm = true;
+          $scope.modalTitle = "Editar Questão";
+        } else {
+          $scope.question = {};
+          $scope.editForm = false;
+          $scope.modalTitle = "Nova Questão";
+        }
+
+        var subjService = subjectService.getSubjects($scope.subject.id, $scope.subject.nome);
+      	subjService.then(function (subjectResponse){
+  			     $scope.subjects = subjectResponse.subjects;
+        });
+
+        $scope.questionModal = $uibModal.open({
+          templateUrl: '/views/mf_question.html',
+          size: 'lg',
+          scope: $scope,
+        })
+      }
+
+      $scope.closeModal = function(){
+        $scope.questionModal.dismiss('cancel');
       }
     }
   });

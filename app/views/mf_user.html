@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalTitle}}</h3>
+</div>
+<div class="modal-body">
+  <form class="form-group row">
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="nome-user">Nome: &nbsp;</label>
+      <input type="text" ng-model="user.nome" name="nome-user" class="form-control"></input>
+    </div>
+
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="email-user">Email: &nbsp;</label>
+      <input type="text" ng-model="user.email" name="email-user" class="form-control"></input>
+    </div>
+
+    <div ng-if="!editForm" class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="senha-user">Senha: &nbsp;</label>
+      <input type="password" ng-model="user.senha" name="senha-user" class="form-control"></input>
+    </div>
+
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right">Admin: &nbsp;</label>
+      <select ng-model="user.is_admin" name="is_admin-user" class="form-control">
+        <option value="false" ng-selected="!user.is_admin">Não</option>
+        <option value="true" ng-selected="user.is_admin">Sim</option>
+      </select>
+    </div>
+
+    <div ng-if="editForm" class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="data_cadastro-user">Cadastro: &nbsp;</label>
+      <span>{{user.data_cadastro}}</span>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="modal-buttons-footer">
+    <button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewUser()">Criar</button>
+    <button ng-if="editForm" class="pull-right btn btn-success" ng-click="editUser()">Salvar</button>
+    <button class="btn btn-danger" ng-click="closeModal()">Fechar</button>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div ng-init="init()">
+  <div class="">
+    <h1>{{course.nome}} - Detalhe</h1>
+  </div>
+  &nbsp;
+
+  <div class="course-info">
+    <form class="form-group row">
+      <div class="col-lg-12 form-inline">
+        <label class="col-lg-2 text-right">Nome: &nbsp;</label>
+        <span>{{course.nome}}</span>
+      </div>
+
+      <div class="col-lg-12 form-inline">
+        <label class="col-lg-2 text-right">Descrição: &nbsp;</label>
+        <span>{{course.descricao}}</span>
+      </div>
+
+    </form>
+    <br />
+    <div class="col-lg-12">
+      <i ng-click="institutionsCollapsed = !institutionsCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Instituições</span></i>
+      <hr>
+      <div uib-collapse="institutionsCollapsed">
+        <div class="well well-lg">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <th class="col-md-1"> </th>
+                        <th class="col-md-2">Sigla</th>
+                        <th class="col-md-6">Nome</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="institution in course.instituicoes | orderBy: 'sigla'">
+                            <td> <a href="#/instituicao/detalhe/{{institution.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
+                            <td ng-model="institution.sigla">{{institution.sigla}}</td>
+                            <td ng-model="institution.nome">{{institution.nome}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>

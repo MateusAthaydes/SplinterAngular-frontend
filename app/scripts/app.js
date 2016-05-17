@@ -42,6 +42,11 @@ angular
         controller: 'CourseCtrl',
         controllerAs: 'course'
       })
+      .when('/curso/detalhe/:id', {
+        templateUrl: 'views/course_detail.html',
+        controller: 'CoursedetailCtrl',
+        controllerAs: 'coursedetail'
+      })
       .when('/areas', {
         templateUrl: 'views/subject.html',
         controller: 'SubjectCtrl',
@@ -56,6 +61,11 @@ angular
         templateUrl: 'views/examination_detail.html',
         controller: 'ExaminationdetailCtrl',
         controllerAs: 'examinationdetail'
+      })
+      .when('/usuarios', {
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
       })
       .otherwise({
         redirectTo: '/'
