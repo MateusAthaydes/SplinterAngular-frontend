@@ -35,18 +35,18 @@
       <hr>
       <div uib-collapse="questionsCollapsed">
         <div class="well-lg">
-          <div ng-repeat="questionBySubject in questionsToFilter() | filter:groupQuestionBySubject">
-            <i ng-click="subjectCollapsed = !subjectCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> {{questionBySubject.area_conhecimento.nome}}</span></i><hr>
+          <div ng-repeat="subject in subjects">
+            <i ng-click="subjectCollapsed = !subjectCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> {{subject.nome}}</span></i><hr>
             <div uib-collapse="subjectCollapsed">
-              <div class="well-lg" ng-init="questionList = questionsBySubjectGroup(questionBySubject)">
+              <div class="well-lg" ng-init="questionList = questionsBySubjectGroup(subject)">
                 <div ng-repeat="question in questionList">
                   <div class="well">
                     <label>Questão: </label>
                     <span>{{question.descricao}}</span>
-                    <!-- <td class="table-button">
+                    <td class="table-button">
         								<button class="btn btn-primary pull-right" ng-click="createEditQuestionModal(question)">Editar</button>
         								<button class="btn btn-danger pull-right" ng-click=""> Excluir</button>
-        						</td> -->
+        						</td>
                   </div>
                 </div>
               </div>
