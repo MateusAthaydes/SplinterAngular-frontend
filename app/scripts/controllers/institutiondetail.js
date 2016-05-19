@@ -8,16 +8,53 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('InstitutiondetailCtrl', function ($scope, $window, $uibModal, $routeParams, institutionService) {
+  .controller('InstitutiondetailCtrl', function ($scope, $window, $uibModal, $routeParams, institutionService, examinationService, courseService) {
     $scope.institution = {
         id: $routeParams.id,
         sigla: null,
         nome: null,
         site: null,
         privado: null,
-        cursos: null
+        concursos: [],
+        cursos: []
     }
 
+    $scope.examination = {
+      id: null,
+      id_instituicao_ensino: $routeParams.id,
+      nome: null,
+      ano: null,
+      semestre: null,
+      data_inicio: null,
+      duracao: null
+  }
+
+  $scope.course = {
+      id: null,
+      nome: null,
+      descricao: null,
+      instituicoes: null
+  }
+
+    $scope.today = function() {
+      $scope.examination.data_inicio = new Date();
+    };
+
+    $scope.today();
+
+    $scope.clear = function() {
+      $scope.examination.data_inicio = null;
+    };
+
+    $scope.popup2 = {
+      opened: false
+    };
+
+    $scope.open2 = function() {
+      $scope.popup2.opened = true;
+    };
+
+    $scope.courses = [];
     $scope.coursesCollapsed = true;
     $scope.examinationCollapsed = true;
     $scope.subjectScoreCollapsed = true;
@@ -25,9 +62,15 @@ angular.module('splinterAngularFrontendApp')
     $scope.init = function(){
       var instService = institutionService.getInstitution($scope.institution.id,
                                             $scope.institution.sigla, $scope.institution.nome,
-                                            $scope.institution.site, $scope.institution.privado);
+                                            $scope.institution.site, $scope.institution.privado,
+                                            $scope.institution.concursos, $scope.institution.cursos);
     	instService.then(function (institutionResponse){
-			     $scope.institution = institutionResponse;
+            $scope.institution.sigla = institutionResponse.sigla;
+            $scope.institution.nome = institutionResponse.nome;
+            $scope.institution.site = institutionResponse.site;
+            $scope.institution.privado = institutionResponse.privado;
+            $scope.institution.concursos = institutionResponse.concursos;
+            $scope.institution.cursos = institutionResponse.cursos;
     	});
     }
 
@@ -41,34 +84,91 @@ angular.module('splinterAngularFrontendApp')
       });
     }
 
+      $scope.openExaminationModal = function(examination){
+        if (examination){
+          $scope.examination = examination;
+          $scope.editForm = true;
+          $scope.modalTitle = "Editar Concurso";
+        } else {
+          $scope.examination = {id_instituicao_ensino: $routeParams.id};
+          $scope.editForm = false;
+          $scope.modalTitle = "Nova Concurso";
+        }
+
+        $scope.examinationModal = $uibModal.open({
+          templateUrl: '/views/mf_examination.html',
+          size: 'lg',
+          scope: $scope,
+        });
+      }
+
+      $scope.createNewExamination = function(){
+        console.log($scope.examination);
+        var examService = examinationService.createNewExamination($scope.examination);
+        examService.then(function (objSuccess){
+          $scope.examinationModal.close();
+          $window.location.reload();
+        })
+      }
+
+      $scope.gambetaReferenciaCircularInstitution = function(){
+        var institutionIdList = [];
+        angular.forEach($scope.institution.cursos, function(course, key){
+          angular.forEach(course.instituicoes, function(insitituicao, key){
+            delete insitituicao.cursos;
+          });
+        });
+      }
+
+      $scope.gambetaReferenciaCircularCourse = function(){
+        angular.forEach($scope.course.instituicoes, function(institution, key){
+          angular.forEach(institution.cursos, function(curso, key){
+            delete curso.instituicoes;
+          });
+        });
+      }
+
+      $scope.bindCourseToInstitution = function(course){
+        $scope.course = course;
+        var inList = $scope.objInList($scope.institution, $scope.course.instituicoes);
+        if(!inList){
+          $scope.course.instituicoes.push($scope.institution);
+        }
+
+        var couList = $scope.objInList($scope.course, $scope.institution.cursos);
+        if(!couList){
+          $scope.institution.cursos.push($scope.course);
+        }
+
+        $scope.gambetaReferenciaCircularCourse();
+        var instService = institutionService.editInstitution($scope.institution);
+        instService.then(
+          function(objSuccess){
+            console.log("insittuição ok");
+        }, function(objError){
+          console.log("Problemas em vincular curso em instituição");
+          console.log(objError);
+        });
+        $scope.courseModal.close();
+      }
+
+      $scope.objInList = function (obj, objList) {
+        var i;
+        var inList = false;
+        angular.forEach(objList, function(object, key){
+          if (object.id === obj.id){
+            inList = true;
+          }
+        });
+        return inList;
+      }
+
     /*
     ----------------------------------------------------------------------------
     Modal configuration
     create and edit modal;
     confirmation modal;
     */
-
-    // $scope.createEditInstitutionModal = function(institution){
-    //   if (institution){
-    //     $scope.institution = institution;
-    //     $scope.editForm = true;
-    //     $scope.modalTitle = "Editar Instituição";
-    //   } else {
-      //     $scope.institution = {};
-    //     $scope.editForm = false;
-    //     $scope.institution.privado = false;
-    //     $scope.modalTitle = "Nova Instituição";
-    //   }
-    //
-    //   $scope.institutionModal = $uibModal.open({
-    //     templateUrl: '/views/mf_institution.html',
-    //     scope: $scope,
-    //   })
-    // }
-    //
-    // $scope.closeModal = function(){
-    //   $scope.institutionModal.dismiss('cancel');
-    // }
 
     $scope.openConfirmationModal = function(type, object){
         $scope.removeType = type;
@@ -79,6 +179,21 @@ angular.module('splinterAngularFrontendApp')
             templateUrl: '/views/confirmation_modal.html',
             scope: $scope
         })
+    }
+
+    $scope.openCourseModal = function(){
+      $scope.modalTitle = "Vincular Curso";
+
+      var courService = courseService.getCourses($scope.course.id, $scope.course.nome, $scope.course.descricao);
+        courService.then(function (courseResponse){
+          $scope.courses = courseResponse.courses;
+      });
+
+      $scope.courseModal = $uibModal.open({
+        templateUrl: '/views/mf_intituionCourses.html',
+        size: 'lg',
+        scope: $scope,
+      });
     }
 
     $scope.confirm = function(){
@@ -96,5 +211,13 @@ angular.module('splinterAngularFrontendApp')
 
     $scope.closeConfirmationModal = function(){
         $scope.confirmationModal.dismiss('cancel');
+    }
+
+    $scope.closeCourseModal = function(){
+        $scope.courseModal.dismiss('cancel');
+    }
+
+    $scope.closeExaminationModal = function(){
+      $scope.examinationModal.dismiss('cancel');
     }
   });

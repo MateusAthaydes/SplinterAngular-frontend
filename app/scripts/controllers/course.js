@@ -21,12 +21,11 @@ angular.module('splinterAngularFrontendApp')
     $scope.init = function(){
     	var courService = courseService.getCourses($scope.course.id, $scope.course.nome, $scope.course.descricao);
     	courService.then(function (courseResponse){
-			$scope.courses = courseResponse.courses;
+			     $scope.courses = courseResponse.courses;
     	});
     }
 
     $scope.createNewcourse = function(){
-      console.log($scope.course);
       var courService = courseService.createNewCourse($scope.course);
       courService.then(function (objSuccess){
         $scope.courseModal.close();

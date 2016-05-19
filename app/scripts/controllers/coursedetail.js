@@ -23,6 +23,7 @@ angular.module('splinterAngularFrontendApp')
                                             $scope.course.descricao);
     	courService.then(function (courseResponse){
 			     $scope.course = courseResponse;
+           console.log($scope.course);
     	});
 
     }

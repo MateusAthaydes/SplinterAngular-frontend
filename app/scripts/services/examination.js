@@ -28,6 +28,17 @@ angular.module('splinterAngularFrontendApp')
         });
         return deferred.promise;
       },
+      createNewExamination: function (examination){
+        var deferred = $q.defer();
+        var resource = $resource(Url.Examinations);
+        resource.save(examination,
+          function (data){
+            return deferred.resolve(data);
+          }, function (response){
+            return deferred.reject(response);
+          });
+        return deferred.promise;
+      },
       getExamination: function (id, instituicao, nome, ano, semestre, data_inicio, duracao){
         var deferred = $q.defer();
         var resource = $resource(Url.Examination + '/' + id);
