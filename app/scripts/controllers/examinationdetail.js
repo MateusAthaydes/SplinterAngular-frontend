@@ -33,10 +33,19 @@ angular.module('splinterAngularFrontendApp')
        nome: null
     }
 
+    $scope.alternative = {
+      id: null,
+      id_questao: null,
+      descricao: null,
+      alternativa_correta: null,
+    }
+
     $scope.questions = [];
     $scope.subjects = [];
+    $scope.questionsAlternatives = {};
     $scope.questionsCollapsed = false;
     $scope.subjectCollapsed = true;
+    $scope.alternativesCollapsed = true;
 
     $scope.init = function(){
       var examService = examinationService.getExamination($scope.examination.id,
@@ -95,8 +104,8 @@ angular.module('splinterAngularFrontendApp')
       /*
       ----------------------------------------------------------------------------
       Modal configuration
-      create and edit modal;
-      confirmation modal;
+      * create and edit modal;
+      * confirmation modal;
       */
 
       $scope.createEditQuestionModal = function(question){
@@ -114,7 +123,7 @@ angular.module('splinterAngularFrontendApp')
           templateUrl: '/views/mf_question.html',
           size: 'lg',
           scope: $scope,
-        })
+        });
       }
 
       $scope.closeModal = function(){

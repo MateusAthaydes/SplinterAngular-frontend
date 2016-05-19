@@ -1,0 +1,18 @@
+.alternatives-list {
+  padding: 15px;
+  width: 116%;
+}
+
+.alternatives-list .alternatives-action-btn .btn-primary {
+  margin-left: 5px;
+}
+
+.correct-answer-icon{
+  cursor: pointer;
+  color: #5cb85c;
+}
+
+.incorrect-answer-icon{
+  cursor: pointer;
+  color: #d9534f;
+}

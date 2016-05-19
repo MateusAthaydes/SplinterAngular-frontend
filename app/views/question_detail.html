@@ -1,0 +1,54 @@
+<div ng-init="init()">
+  <div class="">
+    <h1>Questão - Detalhes</h1>
+  </div>
+    &nbsp;
+  <hr>
+    &nbsp;
+  <div class="row">
+
+    <div class="col-md-4">
+      <label>Área de conhecimento: </label>
+      <span><b>{{question.id_area_conhecimento}}</b></span>
+    </div>
+    <div class="col-md-4">
+      <label>Número de acertos: </label>
+      <span>{{question.numero_acertos}}</span>
+    </div>
+    <div class="col-md-4">
+      <label>Número de erros: </label>
+      <span><b>{{question.numero_erros}}</b></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <span>{{question.descricao}}</span>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Alternativas</h3>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-success btn-collapse" name="button" ng-click="openAlternativeModal()">Nova Alternativa</button>
+    </div>
+    <hr>
+    <br />
+    <div ng-repeat="alternative in alternatives">
+      <div class="well alternatives-list row">
+        <div class="col-md-1">
+          <i ng-if="alternative.alternativa_correta" class="glyphicon glyphicon-ok" style="color:#5cb85c;" rel="tooltip" title="Correta"></i>
+          <i ng-if="!alternative.alternativa_correta" class="glyphicon glyphicon-remove" style="color:#d9534f;" rel="tooltip" title="Incorreta"></i>
+        </div>
+        <div class="col-md-8">
+          <span>{{alternative.descricao}}</span>
+        </div>
+        <div class="alternatives-action-btn col-md-3">
+          <button class="btn btn-primary pull-right" ng-click="" disabled="disabled">Editar</button>
+          <button class="btn btn-danger pull-right" ng-click="openConfirmationModal(alternative)"> Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

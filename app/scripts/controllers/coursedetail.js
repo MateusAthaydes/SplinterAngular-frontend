@@ -19,11 +19,9 @@ angular.module('splinterAngularFrontendApp')
     $scope.institutionsCollapsed = true;
 
     $scope.init = function(){
-      console.log($scope.course);
       var courService = courseService.getCourse($scope.course.id, $scope.course.nome,
                                             $scope.course.descricao);
     	courService.then(function (courseResponse){
-          console.log(courseResponse);
 			     $scope.course = courseResponse;
     	});
 

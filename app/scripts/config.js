@@ -12,7 +12,10 @@ angular.module('splinterAngularFrontendApp')
 			Users: BaseUrl.localApi + '/users',
 			User: BaseUrl.localApi + '/user',
 			Questions: BaseUrl.localApi + '/questions',
-			QuestionsByExamination: BaseUrl.localApi + '/questions/examination'
+			Question: BaseUrl.localApi + '/question',
+			QuestionsByExamination: BaseUrl.localApi + '/questions/examination',
+			Alternatives: BaseUrl.localApi + '/alternatives',
+			Alternative: BaseUrl.localApi + '/alternative'
 		}
 	});
 

@@ -5,7 +5,7 @@
   <form class="form-group row">
     <div class="col-lg-12 form-inline">
       <label class="col-lg-2 text-right" for="descricao-question">Descrição: &nbsp;</label>
-      <textarea type="text" ng-model="question.descricao" name="descricao-question" class="form-control"></textarea>
+      <textarea type="text" ng-model="question.descricao" name="descricao-question" rows="8" cols="40" class="form-control"></textarea>
     </div>
 
     <div class="col-lg-12 form-inline">
@@ -14,9 +14,7 @@
       <select ng-model="question.id_area_conhecimento" name="area_conhecimento-question" class="form-control">
         <option ng-repeat="subject in subjects" value="{{subject.id}}">{{subject.nome}}</option>
       </select>
-      {{question}}
     </div>
-    <hr>
   </form>
 </div>
 <div class="modal-footer">
