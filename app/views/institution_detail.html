@@ -35,7 +35,7 @@
       <div class="col-lg-4">
         <i ng-click="examinationCollapsed = !examinationCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Concursos</span></i>
       </div>
-      <button class="btn btn-success btn-collapse" ng-click="">Novo Concurso</button>
+      <button class="btn btn-success btn-collapse" ng-click="openExaminationModal()">Novo Concurso</button>
       <br />
       <hr>
       <div uib-collapse="examinationCollapsed">
@@ -57,7 +57,7 @@
                   <td ng-model="examination.ano">{{examination.ano}}</td>
                   <td ng-model="examination.semestre">{{examination.semestre}}</td>
                   <td ng-model="examination.data_inicio">{{examination.data_inicio}}</td>
-                  <td align="right"><i ng-click="openConfirmationModal('course', course)" class="glyphicon glyphicon-trash" rel="tooltip" title="Remover o vínculo entre o curso de {{course.nome}} e a instituição {{institution.sigla}}."/></td>
+                  <td align="right"><i ng-click="openConfirmationModal('examination', examination)" class="glyphicon glyphicon-trash" rel="tooltip" title="Remover o vínculo entre o concurso de {{examination.nome}} e a instituição {{institution.sigla}}."/></td>
                 </tr>
               </tbody>
             </table>
@@ -69,7 +69,7 @@
       <div class="col-lg-4">
         <i ng-click="coursesCollapsed = !coursesCollapsed" class="glyphicon glyphicon-plus-sign collapse-icon"><span> Cursos</span></i>
       </div>
-      <button class="btn btn-success btn-collapse" ng-click="">Novo Curso</button>
+      <button class="btn btn-success btn-collapse" ng-click="openCourseModal()">Novo Curso</button>
       <br />
       <hr>
       <div uib-collapse="coursesCollapsed">

@@ -12,21 +12,41 @@ angular.module('splinterAngularFrontendApp')
     $scope.examination = {
       id: $routeParams.id,
       instituicao:  null,
-      questions: [],
       nome: null,
       ano: null,
       semestre: null,
       data_inicio: null,
       duracao: null
-   }
+    }
 
-   $scope.subject = {
+    $scope.question = {
+      id: null,
+     descricao: null,
+     id_concurso: $scope.examination.id,
+     id_area_conhecimento: null,
+     numero_acertos: null,
+     numero_erros: null
+    }
+
+    $scope.subject = {
        id: null,
        nome: null
-   }
+    }
 
+    $scope.alternative = {
+      id: null,
+      id_questao: null,
+      descricao: null,
+      alternativa_correta: null,
+    }
+
+    $scope.questions = [];
+    $scope.subjects = [];
+    $scope.questionsAlternatives = {};
     $scope.questionsCollapsed = false;
     $scope.subjectCollapsed = true;
+    $scope.alternativesCollapsed = true;
+
     $scope.init = function(){
       var examService = examinationService.getExamination($scope.examination.id,
                                             $scope.examination.institution, $scope.examination.nome,
@@ -36,23 +56,33 @@ angular.module('splinterAngularFrontendApp')
            $scope.examination = examinationResponse;
       });
 
-      $scope.questionsToFilter = function(){
-        $scope.questionSubjects = [];
-        return $scope.examination.questoes;
-      }
+      $scope.question.id_concurso = $scope.examination.id;
 
-      $scope.groupQuestionBySubject = function(question){
-        var newSubject = $scope.questionSubjects.indexOf(question.area_conhecimento.nome) == -1;
-        if(newSubject) {
-          $scope.questionSubjects.push(question.area_conhecimento.nome);
-        }
-        return newSubject
-      }
+      var questService = questionService.getQuestionsByExamination($scope.question.id, $scope.question.descricao, $scope.question.id_concurso,
+                                            $scope.question.id_area_conhecimento, $scope.question.numero_acertos,
+                                            $scope.question.numero_acertos);
+      questService.then(function (questionsResponse){
+        $scope.questions = questionsResponse.questions;
+      });
 
-      $scope.questionsBySubjectGroup = function(questionBySubject){
+      var subjService = subjectService.getSubjects($scope.subject.id, $scope.subject.nome);
+      subjService.then(function (subjectsResponse){
+        $scope.subjects = subjectsResponse.subjects;
+      });
+
+      angular.forEach($scope.subjects, function(subject, subject_key) {
+        angular.forEach($scope.questions, function(question, question_key){
+            if (subject.id != question.id_area_conhecimento){
+              $scope.subjects.splice(subject_key);
+            }
+        });
+      });
+    }
+
+      $scope.questionsBySubjectGroup = function(subject){
         var questionsBySubjectList = [];
-        angular.forEach($scope.examination.questoes, function(question, key) {
-          if (question.area_conhecimento.id == questionBySubject.area_conhecimento.id){
+        angular.forEach($scope.questions, function(question, key) {
+          if (question.id_area_conhecimento == subject.id){
               questionsBySubjectList.push(question);
           }
         });
@@ -60,13 +90,8 @@ angular.module('splinterAngularFrontendApp')
       }
 
       $scope.createNewQuestion = function(){
-        $scope.newQuestion = {
-          descricao: $scope.question.descricao,
-          id_area_conhecimento: $scope.question.area_conhecimento.id,
-          id_concurso: $scope.examination.id
-        }
-        var questService = questionService.createNewQuestion($scope.newQuestion)
-        console.log($scope.newQuestion);
+        var questService = questionService.createNewQuestion($scope.question)
+        console.log($scope.question);
         questService.then(function (objSuccess){
           $scope.questionModal.close();
           $window.location.reload();
@@ -79,8 +104,8 @@ angular.module('splinterAngularFrontendApp')
       /*
       ----------------------------------------------------------------------------
       Modal configuration
-      create and edit modal;
-      confirmation modal;
+      * create and edit modal;
+      * confirmation modal;
       */
 
       $scope.createEditQuestionModal = function(question){
@@ -89,25 +114,19 @@ angular.module('splinterAngularFrontendApp')
           $scope.editForm = true;
           $scope.modalTitle = "Editar Questão";
         } else {
-          $scope.question = {};
+          $scope.question = {id_concurso: $scope.examination.id};
           $scope.editForm = false;
           $scope.modalTitle = "Nova Questão";
         }
-
-        var subjService = subjectService.getSubjects($scope.subject.id, $scope.subject.nome);
-      	subjService.then(function (subjectResponse){
-  			     $scope.subjects = subjectResponse.subjects;
-        });
 
         $scope.questionModal = $uibModal.open({
           templateUrl: '/views/mf_question.html',
           size: 'lg',
           scope: $scope,
-        })
+        });
       }
 
       $scope.closeModal = function(){
         $scope.questionModal.dismiss('cancel');
       }
-    }
   });

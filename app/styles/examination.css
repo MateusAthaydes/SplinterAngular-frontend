@@ -1,0 +1,9 @@
+.new-examination .examination-name{
+  width: 85%;
+  margin-left: 28px;
+}
+
+.new-examination .examination-formField{
+  width: 100px;
+  margin-left: 5px;
+}

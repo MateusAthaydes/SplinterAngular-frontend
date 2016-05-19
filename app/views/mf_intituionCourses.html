@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalTitle}}</h3>
+</div>
+<div class="modal-body">
+  <form class="course-institution-form form-group row">
+    <div class="col-lg-12 form-inline">
+      <label for="drop-course">Escolha abaixo um curso para vincular à esta instituição</label>
+    </div>
+    <div class="col-lg-12 form-inline">
+      <select name="drop-course" class="course-drop col-lg-12 form-control"
+      ng-options="course.nome for course in courses track by course.id"
+      ng-model="course">
+      </select>
+    </div>
+    <div class="col-lg-12">
+      <label>Nome: </label>
+      <span>{{course.nome}}</span>
+    </div>
+    <div class="col-lg-12">
+      <label>Descrição: </label>
+      <span>{{course.descricao}}</span>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="modal-buttons-footer">
+    <button class="pull-right btn btn-success" ng-click="bindCourseToInstitution(course)">Salvar</button>
+    <button class="btn btn-danger" ng-click="closeCourseModal()">Fechar</button>
+  </div>
+</div>

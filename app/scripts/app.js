@@ -67,6 +67,11 @@ angular
         controller: 'UserCtrl',
         controllerAs: 'user'
       })
+      .when('/questao/detalhe/:id', {
+        templateUrl: 'views/question_detail.html',
+        controller: 'QuestionCtrl',
+        controllerAs: 'question'
+      })
       .otherwise({
         redirectTo: '/'
       });

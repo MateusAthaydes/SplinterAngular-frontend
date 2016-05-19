@@ -60,15 +60,17 @@ angular.module('splinterAngularFrontendApp')
             return deferred.reject(response);
           });
       },
-      getInstitution: function (id, sigla, nome, site, privado){
+      getInstitution: function (id, sigla, nome, site, privado, concursos, cursos){
         var deferred = $q.defer();
         var resource = $resource(Url.Institution + '/' + id);
         resource.get({
-                id: id,
+          id: id,
     			sigla: sigla,
     			nome: nome,
     			site: site,
-    			privado: privado
+    			privado: privado,
+          concursos: concursos,
+          cursos: cursos
         }, function (data){
     			return deferred.resolve(data);
     		}, function (response){

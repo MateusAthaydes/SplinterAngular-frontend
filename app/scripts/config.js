@@ -11,7 +11,11 @@ angular.module('splinterAngularFrontendApp')
 			Examination: BaseUrl.herokuApi + '/examination',
 			Users: BaseUrl.herokuApi + '/users',
 			User: BaseUrl.herokuApi + '/user',
-			Questions: BaseUrl.herokuApi + '/questions'
+			Questions: BaseUrl.herokuApi + '/questions',
+			Question: BaseUrl.herokuApi + '/question',
+			QuestionsByExamination: BaseUrl.herokuApi + '/questions/examination',
+			Alternatives: BaseUrl.herokuApi + '/alternatives',
+			Alternative: BaseUrl.herokuApi + '/alternative'
 		}
 	});
 
