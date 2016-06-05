@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalTitle}}</h3>
+</div>
+<div class="modal-body">
+  <form class="form-group row">
+      <div class="col-lg-12 form-inline">
+        <div class="col-md-1" ng-click="alternative.alternativa_correta = !alternative.alternativa_correta">
+          <i ng-if="alternative.alternativa_correta" class="glyphicon glyphicon-ok correct-answer-icon" rel="tooltip" title="Correta"></i>
+          <i ng-if="!alternative.alternativa_correta" class="glyphicon glyphicon-remove incorrect-answer-icon" rel="tooltip" title="Incorreta"></i>
+        </div>
+        <div class="col-md-11">
+          <textarea type="text" ng-model="alternative.descricao" name="descricao-alternative" rows="2" cols="40" class="form-control"></textarea>
+        </div>
+      </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="modal-buttons-footer">
+    <button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewAlternative()">Criar</button>
+    <button class="btn btn-danger" ng-click="closeModal()">Fechar</button>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalTitle}}</h3>
+</div>
+<div class="modal-body">
+  <form class="new-examination form-group">
+    <div class="row">
+      <div class="col-lg-12 form-inline">
+        <label class="text-right" for="nome-examination">Nome: &nbsp;</label>
+        <input type="text" placeholder="Vestibular 2016" ng-model="examination.nome" name="nome-examination" class="examination-name form-control"></input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 form-inline">
+        <label class="text-right" for="semestre-examination">semestre: &nbsp;</label>
+        <input type="number" min="1" max="2" placeholder="1" ng-model="examination.semestre" name="semestre-examination" class="examination-formField form-control"></input>
+      </div>
+      <div class="col-lg-4 form-inline">
+        <label class="text-right" for="ano-examination">Ano: &nbsp;</label>
+        <input type="number" min="1980" ng-model="examination.ano" placeholder="2016" name="ano-examination" class="examination-formField form-control"></input>
+      </div>
+      <div class="col-lg-4 form-inline">
+        <label class="text-right" for="ano-examination">duracao: &nbsp;</label>
+        <input type="number" placeholder="5" min="1" ng-model="examination.duracao" name="ano-examination" class="examination-formField form-control"></input> dias
+      </div>
+        <div class="col-md-6 form-inline">
+          <label for="">Data de início: </label>
+          <p class="input-group">
+            <input type="text" ng-model="examination.data_inicio" class="form-control" uib-datepicker-popup is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="modal-buttons-footer">
+    <button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewExamination()">Criar</button>
+    <button ng-if="editForm" class="pull-right btn btn-success" ng-click="editCourse()">Salvar</button>
+    <button class="btn btn-danger" ng-click="closeExaminationModal()">Fechar</button>
+  </div>
+</div>

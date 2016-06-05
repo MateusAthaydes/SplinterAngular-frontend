@@ -1,0 +1,16 @@
+.table-button .btn-danger{
+  margin-left: 5px;
+}
+
+.form-inline{
+  margin-bottom: 1em;
+}
+
+.modal-buttons-footer button{
+  width: 69px;
+  margin-left: 5px;
+}
+
+.form-inline .form-group .filter-input input{
+  width: 386px;
+}

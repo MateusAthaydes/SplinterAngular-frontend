@@ -2,23 +2,20 @@
 
 /**
  * @ngdoc service
- * @name splinterAngularFrontendApp.instituicao
+ * @name splinterAngularFrontendApp.subject
  * @description
- * # instituicao
+ * # subject
  * Service in the splinterAngularFrontendApp.
  */
 angular.module('splinterAngularFrontendApp')
-  .service('instituicaoService', function ($resource, $q, $http, Url) {
+  .service('subjectService', function ($resource, $q, $http, Url) {
     return{
-    	getInstitutions: function (id, sigla, nome, site, privado){
+    	getSubjects: function (id, nome){
     		var deferred = $q.defer();
-    		var resource = $resource(Url.Institutions);
+    		var resource = $resource(Url.Subjects);
     		resource.get({
-          id: id,
-    			sigla: sigla,
-    			nome: nome,
-    			site: site,
-    			privado: privado
+                id: id,
+    			nome: nome
     		},function (data){
     			return deferred.resolve(data);
     		}, function (response){
@@ -26,10 +23,10 @@ angular.module('splinterAngularFrontendApp')
     		});
     		return deferred.promise;
     	},
-      createNewInstitution: function (institution){
+      createNewSubject: function (subject){
         var deferred = $q.defer();
-        var resource = $resource(Url.Institutions);
-        resource.save(institution,
+        var resource = $resource(Url.Subjects);
+        resource.save(subject,
           function (data){
             return deferred.resolve(data);
           }, function (response){
@@ -37,10 +34,10 @@ angular.module('splinterAngularFrontendApp')
           });
         return deferred.promise;
       },
-      editInstitution: function (institution) {
+      editSubject: function (subject) {
         var deferred = $q.defer();
-        var resource = Url.EditInstitution + '/' + institution.id;
-        $http.put(resource, institution)
+        var resource = Url.Subject + '/' + subject.id;
+        $http.put(resource, subject)
           .success(function (data, status, headers){
             return deferred.resolve(data);
           })
@@ -49,6 +46,17 @@ angular.module('splinterAngularFrontendApp')
           });
 
           return deferred.promise;
+      },
+      deleteSubject: function (subject) {
+        var deferred = $q.defer();
+        var resource = $resource(Url.Subject + '/' + subject.id);
+        resource.delete(subject,
+          function (data){
+            return data.$resolved;
+          }, function (response){
+            return deferred.reject(response);
+          });
+
       }
     }
   });

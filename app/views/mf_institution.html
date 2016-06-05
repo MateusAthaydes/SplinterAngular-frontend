@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalTitle}}</h3>
+</div>
+<div class="modal-body">
+  <form class="form-group row">
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="sigla-institution">Sigla: &nbsp;</label>
+      <input type="text" ng-model="institution.sigla" name="sigla-institution" class="form-control"></input>
+    </div>
+
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="nome-institution">Nome: &nbsp;</label>
+      <input type="text" ng-model="institution.nome" name="nome-institution" class="form-control"></input>
+    </div>
+
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="site-institution">Site: &nbsp;</label>
+      <input type="text" ng-model="institution.site" name="sigla-institution" class="form-control" placeholder="http://www.site.com"></input>
+    </div>
+
+    <div class="col-lg-12 form-inline">
+      <label class="col-lg-2 text-right" for="tipo-institution">Tipo: &nbsp;</label>
+      <select ng-model="institution.privado" name="tipo-institution" class="form-control">
+        <option value="false" ng-selected="!institution.privado">Público</option>
+        <option value="true" ng-selected="institution.privado">Privado</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="modal-buttons-footer">
+    <button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewInstitution()">Criar</button>
+    <button ng-if="editForm" class="pull-right btn btn-success" ng-click="editInstitution()">Salvar</button>
+    <button class="btn btn-danger" ng-click="closeModal()">Fechar</button>
+  </div>
+</div>

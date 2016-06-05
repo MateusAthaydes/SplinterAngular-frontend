@@ -1,0 +1,44 @@
+<div ng-init="init()">
+	<div class="row">
+		<h1>Instituições</h1>
+	</div>
+	&nbsp;
+
+	<div class="row">
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-11">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+					<div class="pull-right col-lg-1">
+						<button class="btn btn-success" ng-click="createEditInstitutionModal()">Nova Instituição</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<br />
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<th class="col-md-1"> </th>
+					<th class="col-md-2">Sigla</th>
+					<th class="col-md-6">Nome</th>
+					<th class="col-md-3"> </th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="institution in institutions | orderBy: 'sigla' | filter:filterText">
+						<td> <a href="#/instituicao/detalhe/{{institution.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
+						<td ng-model="institution.sigla">{{institution.sigla}}</td>
+						<td ng-model="institution.nome">{{institution.nome}}</td>
+						<td class="table-button">
+								<button class="btn btn-primary" ng-click="createEditInstitutionModal(institution)">Editar</button>
+								<button class="btn btn-danger" ng-click="openConfirmationModal(institution)"> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -12,48 +12,47 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/simple-sidebar.css">
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/instituicao.css">
+    <link rel="stylesheet" href="styles/institution.css">
+    <link rel="stylesheet" href="styles/course.css">
+    <link rel="stylesheet" href="styles/subject.css">
+    <link rel="stylesheet" href="styles/user.css">
+    <link rel="stylesheet" href="styles/question.css">
+    <link rel="stylesheet" href="styles/examination.css">
     <!-- endbuild -->
   </head>
   <body ng-app="splinterAngularFrontendApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">Splinter</a>
-          </div>
-
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-              <li><a ng-href="#/instituicao">Instituições</a></li>
-            </ul>
+            <div id="wrapper">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand"><a ng-href="#/">Splinter</a></li>
+                        <li><a ng-href="#/">Início</a></li>
+                        <li>
+                          <a href="javascript:;" data-toggle="collapse" data-target="#demo"> Cadastros <b class="caret"></b></a>
+                          <ul id="demo" class="collapse">
+                            <li><a ng-href="#/areas">Áreas de Conhecimento</a></li>
+                            <li><a ng-href="#/cursos">Cursos</a></li>
+                            <li><a ng-href="#/instituicoes">Instituições</a></li>
+                            <li><a ng-href="#/concursos">Concursos</a></li>
+                            <li><a ng-href="#/usuarios">Usuários</a></li>
+                          </ul>
+                        </li>
+                        <li><a ng-href="#">Contato</a></li>
+                        <li><a ng-href="#/about">Sobre</a></li>
+                    </ul>
+                </div>
           </div>
         </div>
       </div>
-    </div>
 
     <div class="container">
     <div ng-view=""></div>
     </div>
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -74,18 +73,32 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/config.js"></script>
-        <!-- controllers -->
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/instituicao.js"></script>
-        <!-- services -->
-        <script src="scripts/services/instituicao.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <!-- controllers -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/institution.js"></script>
+    <script src="scripts/controllers/institutiondetail.js"></script>
+    <script src="scripts/controllers/course.js"></script>
+    <script src="scripts/controllers/coursedetail.js"></script>
+    <script src="scripts/controllers/subject.js"></script>
+    <script src="scripts/controllers/examination.js"></script>
+    <script src="scripts/controllers/examinationdetail.js"></script>
+    <script src="scripts/controllers/user.js"></script>
+    <!-- services -->
+    <script src="scripts/services/institution.js"></script>
+    <script src="scripts/services/course.js"></script>
+    <script src="scripts/services/subject.js"></script>
+    <script src="scripts/services/examination.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/question.js"></script>
+    <script src="scripts/controllers/question.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
