@@ -21,4 +21,5 @@ angular.module('splinterAngularFrontendApp')
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
   });
