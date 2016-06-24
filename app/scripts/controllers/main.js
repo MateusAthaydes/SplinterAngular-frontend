@@ -16,4 +16,9 @@ angular.module('splinterAngularFrontendApp')
     ];
 
     $scope.hello = "hey"
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
   });

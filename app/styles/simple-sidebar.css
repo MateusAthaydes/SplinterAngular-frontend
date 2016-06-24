@@ -96,22 +96,6 @@
     background: none;
 }
 
-.sidebar-nav>.open>.dropdown-menu {
-    float: left;
-    position: absolute;
-    margin-top: 0;
-    border: 1px solid rgba(0,0,0,.15);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background-color: #fff;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-
-.sidebar-nav>.open>.dropdown-menu>li>a {
-    white-space: normal;
-}
-
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
