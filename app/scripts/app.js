@@ -72,6 +72,11 @@ angular
         controller: 'QuestionCtrl',
         controllerAs: 'question'
       })
+      .when('/praticar', {
+        templateUrl: 'views/practice_questions.html',
+        controller: 'PracticequestionsCtrl',
+        controllerAs: 'practicequestions'
+      })
       .otherwise({
         redirectTo: '/'
       });
