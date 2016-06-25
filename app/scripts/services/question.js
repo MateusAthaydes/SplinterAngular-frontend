@@ -82,6 +82,18 @@ angular.module('splinterAngularFrontendApp')
           });
           return deferred.promise;
       },
+      editAlternative: function (alternative){
+        var deferred = $q.defer();
+        var resource = Url.Alternative + '/' + alternative.id;
+        $http.put(resource, alternative)
+          .success(function (data, status, headers){
+            return deferred.resolve(data);
+          })
+          .error(function (data, status, headers){
+            return deferred.reject(data);
+        });
+          return deferred.promise;
+      },
       deleteAlternative: function (alternative){
         var deferred = $q.defer();
         var resource = $resource(Url.Alternative + '/' + alternative.id);
