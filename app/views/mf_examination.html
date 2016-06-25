@@ -25,7 +25,7 @@
         <div class="col-md-6 form-inline">
           <label for="">Data de início: </label>
           <p class="input-group">
-            <input type="text" ng-model="examination.data_inicio" class="form-control" uib-datepicker-popup is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <input type="text" ng-model="examination.data_inicio" class="form-control" uib-datepicker-popup="{{format}}" uib-datepicker-popup is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
@@ -38,7 +38,7 @@
 <div class="modal-footer">
   <div class="modal-buttons-footer">
     <button ng-if="!editForm" class="pull-right btn btn-success" ng-click="createNewExamination()">Criar</button>
-    <button ng-if="editForm" class="pull-right btn btn-success" ng-click="editCourse()">Salvar</button>
+    <button ng-if="editForm" class="pull-right btn btn-success" ng-click="editExamination()">Salvar</button>
     <button class="btn btn-danger" ng-click="closeExaminationModal()">Fechar</button>
   </div>
 </div>
