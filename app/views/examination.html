@@ -9,11 +9,10 @@
 			<table class="table table-hover">
 				<thead>
 					<th class="col-md-1"> </th>
-          <th class="col-md-4">Nome</th>
-          <th class="col-md-2">Instituição</th>
+          <th class="col-md-5">Nome</th>
+          <th class="col-md-4">Instituição</th>
   				<th class="col-md-1">Ano</th>
           <th class="col-md-1">Semestre</th>
-          <th class="col-md-3"> </th>
 				</thead>
 				<tbody>
 					<tr ng-repeat="examination in examinations | orderBy: 'ano' | filter:filterText">
@@ -21,11 +20,7 @@
             <td ng-model="examination.nome">{{examination.nome}}</td>
             <td ng-model="examination.instituicao.sigla"><a href="#/instituicao/detalhe/{{examination.instituicao.id}}">{{examination.instituicao.sigla}}</a></td>
             <td ng-model="examination.ano">{{examination.ano}}</td>
-						<td ng-model="examination.semestre">{{examination.semestre}}</td>
-						<td class="table-button">
-								<button class="btn btn-primary" ng-click="createEditInstitutionModal(institution)">Editar</button>
-								<button class="btn btn-danger" ng-click="openConfirmationModal(institution)"> Excluir</button>
-						</td>
+						<td ng-model="examination.semestre" align="center">{{examination.semestre}}</td>
 					</tr>
 				</tbody>
 			</table>

@@ -20,7 +20,7 @@ angular.module('splinterAngularFrontendApp')
     $scope.init = function(){
     	var subjService = subjectService.getSubjects($scope.subject.id, $scope.subject.nome);
     	subjService.then(function (subjectResponse){
-			$scope.subjects = subjectResponse.subjects;
+			     $scope.subjects = subjectResponse.subjects;
     	});
     }
 

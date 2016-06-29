@@ -44,10 +44,9 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.createNewAlternative = function(){
-      console.log($scope.alternative);
       var questService = questionService.createNewAlternative($scope.alternative)
       questService.then(function (objSuccess){
-        $scope.questionModal.close();
+        $scope.alternativeModal.close();
         $window.location.reload();
       }, function(objError){
         console.log(objError);
@@ -60,6 +59,18 @@ angular.module('splinterAngularFrontendApp')
       $window.location.reload();
     }
 
+    $scope.editQuestionAlternative = function(alternative){
+      console.log(alternative);
+      var questService = questionService.editAlternative(alternative);
+      questService.then(function (objSuccess){
+        $scope.closeAlternativeModal();
+        $window.location.reload();
+      }, function(objError){
+        console.log(objError);
+        alert("Ops, houveram problemas.");
+      });
+    }
+
     /*
     ----------------------------------------------------------------------------
     Modal configuration
@@ -67,11 +78,20 @@ angular.module('splinterAngularFrontendApp')
     * confirmation modal;
     */
 
-    $scope.openAlternativeModal = function(){
-        $scope.modalTitle = "Nova Alternativa";
+    $scope.openAlternativeModal = function(alternative){
+        if(alternative) {
+          $scope.modalTitle = "Editar Alternativa";
+          $scope.editForm = true;
+          $scope.alternative.id = alternative.id;
+          $scope.alternative.alternativa_correta = alternative.alternativa_correta;
+          $scope.alternative.descricao = alternative.descricao;
+        } else {
+          $scope.modalTitle = "Nova Alternativa";
+          $scope.alternative.alternativa_correta = false;
+        }
+
         $scope.alternative.id_questao = $scope.question.id
-        $scope.alternative.alternativa_correta = false;
-        $scope.questionModal = $uibModal.open({
+        $scope.alternativeModal = $uibModal.open({
           templateUrl: '/views/mf_alternative.html',
           scope: $scope,
         });
@@ -79,6 +99,10 @@ angular.module('splinterAngularFrontendApp')
 
     $scope.closeModal = function(){
       $scope.questionModal.dismiss('cancel');
+    }
+
+    $scope.closeAlternativeModal = function(){
+      $scope.alternativeModal.dismiss('cancel');
     }
 
     $scope.openConfirmationModal = function (alternative){

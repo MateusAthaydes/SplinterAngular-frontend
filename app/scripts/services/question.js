@@ -82,6 +82,18 @@ angular.module('splinterAngularFrontendApp')
           });
           return deferred.promise;
       },
+      editAlternative: function (alternative){
+        var deferred = $q.defer();
+        var resource = Url.Alternative + '/' + alternative.id;
+        $http.put(resource, alternative)
+          .success(function (data, status, headers){
+            return deferred.resolve(data);
+          })
+          .error(function (data, status, headers){
+            return deferred.reject(data);
+        });
+          return deferred.promise;
+      },
       deleteAlternative: function (alternative){
         var deferred = $q.defer();
         var resource = $resource(Url.Alternative + '/' + alternative.id);
@@ -91,6 +103,27 @@ angular.module('splinterAngularFrontendApp')
           }, function (response){
             return deferred.reject(response);
           });
+      },
+      getQuestionToPractice: function (listSubjects, alternativas, descricao,
+                                        id, id_area_conhecimento, id_concurso,
+                                        numero_acertos, numero_erros){
+        var deferred = $q.defer();
+        console.log(listSubjects);
+        var resource = $resource(Url.Question + '?subjects=' + listSubjects);
+        resource.get({
+          alternativas: alternativas,
+          descricao: descricao,
+          id: id,
+          id_area_conhecimento: id_area_conhecimento,
+          id_concurso: id_concurso,
+          numero_acertos: numero_acertos,
+          numero_erros: numero_erros
+        }, function (data){
+          return deferred.resolve(data);
+        }, function (response){
+          return deferred.reject(response);
+        });
+        return deferred.promise;
       }
     }
   });

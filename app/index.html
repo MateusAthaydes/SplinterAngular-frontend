@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="styles/user.css">
     <link rel="stylesheet" href="styles/question.css">
     <link rel="stylesheet" href="styles/examination.css">
+    <link rel="stylesheet" href="/styles/practice_questions.css">
     <!-- endbuild -->
   </head>
   <body ng-app="splinterAngularFrontendApp">
@@ -28,12 +29,13 @@
       <div class="navbar navbar-default" role="navigation">
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <div id="wrapper">
+
                 <div id="sidebar-wrapper">
                     <ul class="sidebar-nav">
                         <li class="sidebar-brand"><a ng-href="#/">Splinter</a></li>
-                        <li><a ng-href="#/">Início</a></li>
+                        <li><a ng-href="#/"><i class="glyphicon glyphicon-home"></i><span>&nbsp; Início</span></a></li>
                         <li>
-                          <a href="javascript:;" data-toggle="collapse" data-target="#demo"> Cadastros <b class="caret"></b></a>
+                          <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Cadastros <b class="caret"></b></a>
                           <ul id="demo" class="collapse">
                             <li><a ng-href="#/areas">Áreas de Conhecimento</a></li>
                             <li><a ng-href="#/cursos">Cursos</a></li>
@@ -42,18 +44,20 @@
                             <li><a ng-href="#/usuarios">Usuários</a></li>
                           </ul>
                         </li>
+                        <li><a href="#/praticar"><i class="glyphicon glyphicon-ok"></i>&nbsp; Realizar Questões</a></li>
                         <li><a ng-href="#">Contato</a></li>
                         <li><a ng-href="#/about">Sobre</a></li>
                     </ul>
                 </div>
+                <a class="hidden-sm hidden-md" href="#menu-toggle" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+                <div id="page-content-wrapper">
+                  <div class="container container-fluid">
+                    <div ng-view=""></div>
+                  </div>
+                </div>
           </div>
         </div>
       </div>
-
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
-
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -99,6 +103,7 @@
     <script src="scripts/services/user.js"></script>
     <script src="scripts/services/question.js"></script>
     <script src="scripts/controllers/question.js"></script>
+    <script src="scripts/controllers/practicequestions.js"></script>
     <!-- endbuild -->
 </body>
 </html>

@@ -1,0 +1,22 @@
+<div ng-init="init()">
+  <div class="row">
+    <h1>Praticar Questões</h1>
+  </div>
+  <br>
+  <div class="">
+    <form class="" method="post">
+      <p>
+        Essa é a seção para você praticar questões de forma aleatória. Para continuar, selecione as áreas de conhecimento das questões que você deseja praticar.
+      </p>
+      <div ng-repeat="(key, subject) in subjects | orderBy: 'nome'">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-change="checkSubject(subject.id)" ng-model="key">
+            {{subject.nome}}
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-success start-practice" type="button" name="button" ng-click="start_practice()">Começar</button>
+    </form>
+  </div>
+</div>

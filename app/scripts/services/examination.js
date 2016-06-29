@@ -39,6 +39,29 @@ angular.module('splinterAngularFrontendApp')
           });
         return deferred.promise;
       },
+      editExamination: function (examination) {
+        var deferred = $q.defer();
+        var resource = Url.Examination + '/' + examination.id;
+        $http.put(resource, examination)
+          .success(function (data, status, headers){
+            return deferred.resolve(data);
+          })
+          .error(function (data, status, headers){
+            return deferred.reject(data);
+          });
+
+          return deferred.promise;
+      },
+      deleteExamination: function (examination) {
+        var deferred = $q.defer();
+        var resource = $resource(Url.Examination + '/' + examination.id);
+        resource.delete(examination,
+          function (data){
+            return data.$resolved;
+          }, function (response){
+            return deferred.reject(response);
+          });
+      },
       getExamination: function (id, instituicao, nome, ano, semestre, data_inicio, duracao){
         var deferred = $q.defer();
         var resource = $resource(Url.Examination + '/' + id);
