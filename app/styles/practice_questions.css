@@ -1,3 +1,19 @@
 .start-practice{
   margin-left: 80%;
 }
+
+.question{
+  padding-top: 35px;
+}
+
+.question .alternatives{
+  padding: 10px;
+}
+
+.action-buttons{
+  padding-top: 35px;
+}
+
+.action-buttons .finish-button{
+    margin-right: 350px;
+}

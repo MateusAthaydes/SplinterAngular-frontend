@@ -8,7 +8,7 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('PracticequestionsCtrl', function ($scope, subjectService, questionService, Url) {
+  .controller('PracticequestionsCtrl', function ($scope, $rootScope, $location, $window, subjectService, questionService, Url) {
 
     $scope.subject = {
       id: null,
@@ -50,7 +50,6 @@ angular.module('splinterAngularFrontendApp')
       angular.forEach($scope.subjects, function(value, key) {
         $scope.checkbox_subjects[key] = false;
       });
-      console.log($scope.checkbox_subjects);
     }
 
 
@@ -63,25 +62,41 @@ angular.module('splinterAngularFrontendApp')
         $scope.checkbox_subjects[id] = true;
         $scope.subjectsId.push(id)
       }
-
-      console.log($scope.checkbox_subjects[id])
-      console.log($scope.subjectsId);
     }
 
-    $scope.start_practice = function(){
+    $scope.practice_question = function(){
       var questService = questionService.getQuestionToPractice($scope.subjectsId, $scope.alternatives,
                                         $scope.question.descricao, $scope.question.id, $scope.question.id_area_conhecimento,
                                         $scope.question.id_concurso, $scope.question.numero_acertos,
                                         $scope.question.numero_erros);
       questService.then(function(response){
-        $scope.alternatives = response.alternatives;
+        $scope.alternatives = response.alternativas;
         $scope.question.descricao = response.descricao;
         $scope.question.id = response.id;
         $scope.question.id_area_conhecimento = response.id_area_conhecimento;
         $scope.question.id_concurso = response.id_concurso;
         $scope.question.numero_acertos = response.numero_acertos;
         $scope.question.numero_erros = response.numero_erros;
-        console.log($scope.question)
+        $rootScope.question = $scope.question;
+        $rootScope.alternatives = $scope.alternatives;
+        $rootScope.subjectsId = $scope.subjectsId;
+        $location.path('/praticar/questao');
       });
     }
+
+    /*
+    ==================================
+    QUESTION
+    ----------------------------------
+    */
+    $scope.reinitialize_scope = function(){
+      $scope.question = $rootScope.question;
+      $scope.alternatives = $rootScope.alternatives;
+      $scope.subjectsId = $rootScope.subjectsId;
+      $scope.alternative.id = null;
+      $rootScope.question = null;
+      $rootScope.alternatives = null;
+      $rootScope.subjectsId = null;
+    }
+
   });
