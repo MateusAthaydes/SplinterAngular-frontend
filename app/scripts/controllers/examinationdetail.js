@@ -63,24 +63,33 @@ angular.module('splinterAngularFrontendApp')
                                             $scope.question.numero_acertos);
       questService.then(function (questionsResponse){
         $scope.questions = questionsResponse.questions;
-      });
 
-      var subjService = subjectService.getSubjects($scope.subject.id, $scope.subject.nome);
-      subjService.then(function (subjectsResponse){
-        $scope.subjects = subjectsResponse.subjects;
-      });
+        // console.log("questions[init] - " + $scope.questions);
 
-      angular.forEach($scope.subjects, function(subject, subject_key) {
-        angular.forEach($scope.questions, function(question, question_key){
-            if (subject.id != question.id_area_conhecimento){
-              $scope.subjects.splice(subject_key);
-            }
+        var subjService = subjectService.getSubjects($scope.subject.id, $scope.subject.nome);
+        subjService.then(function (subjectsResponse){
+          $scope.subjects = subjectsResponse.subjects;
         });
+
+        angular.forEach($scope.subjects, function(subject, subject_key) {
+          angular.forEach($scope.questions, function(question, question_key){
+              if (subject.id != question.id_area_conhecimento){
+                $scope.subjects.splice(subject_key);
+              }
+          });
+        });
+
       });
+
+
     }
 
       $scope.questionsBySubjectGroup = function(subject){
         var questionsBySubjectList = [];
+
+        // console.log("subject[questionsBySubjectGroup] - " + subject);
+        // console.log("questions[questionsBySubjectGroup] - " + $scope.questions);
+
         angular.forEach($scope.questions, function(question, key) {
           if (question.id_area_conhecimento == subject.id){
               questionsBySubjectList.push(question);
