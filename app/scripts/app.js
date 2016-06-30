@@ -77,6 +77,11 @@ angular
         controller: 'PracticequestionsCtrl',
         controllerAs: 'practicequestions'
       })
+      .when('/praticar/questao', {
+        templateUrl: 'views/practice_question_detail.html',
+        controller: 'PracticequestionsCtrl',
+        controllerAs: 'practicequestions'
+      })
       .otherwise({
         redirectTo: '/'
       });

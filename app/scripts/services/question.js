@@ -136,6 +136,17 @@ angular.module('splinterAngularFrontendApp')
           return deferred.reject(response);
         });
         return deferred.promise;
+      },
+      sendQuestionAnswer: function(alternative_id){
+        var deferred = $q.defer();
+        var resource = $resource(Url.QuestionsAnswer);
+        resource.save(alternative_id,
+          function (data){
+            return deferred.resolve(data);
+          }, function (response){
+            return deferred.reject(response);
+          });
+        return deferred.promise;
       }
     }
   });

@@ -1,0 +1,31 @@
+<div ng-init="reinitialize_scope()">
+  <h1>Praticar Questão</h1>
+  <div class="">
+    <div class="question">
+      <div class="description">
+        {{question.descricao}}
+      </div>
+      <br>
+      <div ng-repeat="alt in alternatives" class="alternatives">
+        <div ng-class="{correct_answer: question_answered && alt.alternativa_correta}">
+          <input type="radio" name="name" ng-model="alternative.id" value="{{alt.id}}" ng-disabled="question_answered" required />
+          {{alt.descricao}}
+        </div>
+      </div>
+      hits: {{$root.hits}}
+      <br>
+      misses: {{$root.misses}}
+    </div>
+    <div class="action-buttons">
+      <button type="button" class="btn btn-success finish-button"
+       name="button" ng-click="finish_practice()">Finalizar</button>
+      <button type="button" class="btn btn-warning"
+         ng-click="practice_question()" ng-disabled="question_answered">
+        Pular</button>
+      <button ng-if="question_answered" type="button" class="btn btn-primary"
+          ng-click="next_question()">Próxima</button>
+      <button ng-if="!question_answered" type="button" class="btn btn-primary"
+          ng-click="answer_question()">Confirmar</button>
+    </div>
+  </div>
+</div>
