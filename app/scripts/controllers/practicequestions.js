@@ -162,6 +162,7 @@ angular.module('splinterAngularFrontendApp')
           $scope.answers.push($scope.answer);
         }
       });
+
       $scope.question_answered = true;
     }
 

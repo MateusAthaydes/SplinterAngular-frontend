@@ -20,7 +20,7 @@
       <button ng-if="question_answered" type="button" class="btn btn-primary"
           ng-click="next_question()">Próxima</button>
       <button ng-if="!question_answered" type="button" class="btn btn-primary"
-          ng-click="answer_question()">Confirmar</button>
+          ng-click="answer_question()" ng-disabled="!alternative.id">Confirmar</button>
     </div>
   </div>
 </div>
