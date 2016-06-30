@@ -8,7 +8,7 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('PracticequestionsCtrl', function ($scope, $rootScope, $location, $window, subjectService, questionService, Url) {
+  .controller('PracticequestionsCtrl', function ($scope, $rootScope, $route, $location, $window, subjectService, questionService, Url) {
 
     $scope.subject = {
       id: null,
@@ -44,12 +44,14 @@ angular.module('splinterAngularFrontendApp')
 			     $scope.subjects = subjectResponse.subjects;
            $scope.createCheckbox();
     	});
+      $rootScope.hits = [];
+      $rootScope.misses = [];
     }
 
     $scope.createCheckbox = function(){
       angular.forEach($scope.subjects, function(value, key) {
-        $scope.checkbox_subjects[key] = false;
-      });
+          $scope.checkbox_subjects[key] = false;
+        });
     }
 
 
@@ -65,6 +67,7 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.practice_question = function(){
+      console.log("hey");
       var questService = questionService.getQuestionToPractice($scope.subjectsId, $scope.alternatives,
                                         $scope.question.descricao, $scope.question.id, $scope.question.id_area_conhecimento,
                                         $scope.question.id_concurso, $scope.question.numero_acertos,
@@ -80,7 +83,12 @@ angular.module('splinterAngularFrontendApp')
         $rootScope.question = $scope.question;
         $rootScope.alternatives = $scope.alternatives;
         $rootScope.subjectsId = $scope.subjectsId;
-        $location.path('/praticar/questao');
+        if ($location.path() == "/praticar/questao"){
+          $route.reload();
+        } else {
+          $location.path('/praticar/questao');
+        }
+
       });
     }
 
@@ -97,6 +105,35 @@ angular.module('splinterAngularFrontendApp')
       $rootScope.question = null;
       $rootScope.alternatives = null;
       $rootScope.subjectsId = null;
+
+      $scope.question_answered = false;
+    }
+
+    $scope.answer_question = function(){
+      angular.forEach($scope.alternatives, function(value, key){
+        if ($scope.alternative.id == value.id){
+          $scope.alternative = value;
+          if(value.alternativa_correta){
+            $rootScope.hits.push(value.id);
+          } else {
+            $rootScope.misses.push(value.id);
+          }
+          //Adicionar a questão que o cara acertou, para o relatório
+        }
+      });
+      $scope.question_answered = true;
+    }
+
+    $scope.next_question = function(){
+      var questService = questionService.sendQuestionAnswer($scope.alternative.id);
+      questService.then(function(objResponse){
+        $scope.practice_question();
+      });
+    }
+
+    $scope.finish_practice = function(){
+      //TO-DO
+      console.log("hey");
     }
 
   });

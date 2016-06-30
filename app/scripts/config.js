@@ -15,7 +15,8 @@ angular.module('splinterAngularFrontendApp')
 			Question: BaseUrl.localApi + '/question',
 			QuestionsByExamination: BaseUrl.localApi + '/questions/examination',
 			Alternatives: BaseUrl.localApi + '/alternatives',
-			Alternative: BaseUrl.localApi + '/alternative'
+			Alternative: BaseUrl.localApi + '/alternative',
+			QuestionsAnswer: BaseUrl.localApi + '/questions/answer'
 		}
 	});
 
