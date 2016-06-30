@@ -87,6 +87,11 @@ angular
         controller: 'PracticequestionsCtrl',
         controllerAs: 'practicequestions'
       })
+      .when('/relatorios/areas', {
+        templateUrl: 'views/report_subject.html',
+        controller: 'ReportSubjectCtrl',
+        controllerAs: 'reportsubject'
+      })
       .otherwise({
         redirectTo: '/'
       });
