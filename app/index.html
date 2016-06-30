@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/user.css">
     <link rel="stylesheet" href="styles/question.css">
     <link rel="stylesheet" href="styles/examination.css">
-    <link rel="stylesheet" href="/styles/practice_questions.css">
+    <link rel="stylesheet" href="styles/practice_questions.css">
     <!-- endbuild -->
   </head>
   <body ng-app="splinterAngularFrontendApp">
@@ -34,8 +34,8 @@
                         <li class="sidebar-brand"><a ng-href="#/">Splinter</a></li>
                         <li><a ng-href="#/"><i class="glyphicon glyphicon-home"></i><span>&nbsp; Início</span></a></li>
                         <li>
-                          <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Cadastros <b class="caret"></b></a>
-                          <ul id="demo" class="collapse">
+                          <a href="javascript:;" data-toggle="collapse" data-target="#cadastros"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Cadastros <b class="caret"></b></a>
+                          <ul id="cadastros" class="collapse">
                             <li><a ng-href="#/areas">Áreas de Conhecimento</a></li>
                             <li><a ng-href="#/cursos">Cursos</a></li>
                             <li><a ng-href="#/instituicoes">Instituições</a></li>
@@ -44,6 +44,12 @@
                           </ul>
                         </li>
                         <li><a href="#/praticar"><i class="glyphicon glyphicon-ok"></i>&nbsp; Praticar Questões</a></li>
+                        <li>
+                          <a href="javascript:;" data-toggle="collapse" data-target="#relatorios"><i class="glyphicon glyphicon-education"></i>&nbsp; Relatórios <b class="caret"></b></a>
+                          <ul id="relatorios" class="collapse">
+                            <li><a ng-href="#/relatorios/areas">Áreas de Conhecimento</a></li>
+                          </ul>
+                        </li>
                         <li><a ng-href="#">Contato</a></li>
                         <li><a ng-href="#/about">Sobre</a></li>
                     </ul>

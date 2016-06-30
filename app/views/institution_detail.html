@@ -44,19 +44,17 @@
             <table class="table table-hover">
               <thead>
                 <th class="col-md-1"> </th>
-                <th class="col-md-4">Nome</th>
+                <th class="col-md-6">Nome</th>
                 <th class="col-md-1">Ano</th>
                 <th class="col-md-1">Semestre</th>
-                <th class="col-md-2">Data</th>
                 <th class="col-md-1"></th>
               </thead>
               <tbody>
-                <tr ng-repeat="examination in institution.concursos | orderBy: 'data_inicio'">
+                <tr ng-repeat="examination in institution.concursos | orderBy: ['-ano', '-semestre']">
                   <td> <a href="#/concurso/detalhe/{{examination.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
                   <td ng-model="examination.nome">{{examination.nome}}</td>
                   <td ng-model="examination.ano">{{examination.ano}}</td>
                   <td ng-model="examination.semestre" align="center">{{examination.semestre}}</td>
-                  <td ng-model="examination.data_inicio">{{examination.data_inicio}}</td>
                   <td align="center">
                     <i ng-click="openExaminationModal(examination)" class="glyphicon glyphicon-edit" rel="tooltip" title="Editar o concurso {{examination.nome}}."/>
                     <i ng-click="openConfirmationModal('examination', examination)" class="glyphicon glyphicon-trash" rel="tooltip" title="Remover o concurso {{examination.nome}} da instituição {{institution.sigla}}."/>

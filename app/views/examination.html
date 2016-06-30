@@ -3,6 +3,16 @@
     <h1>Concursos</h1>
   </div>
   &nbsp;
+		<div>
+			<form class="form-inline">
+				<div class="form-group">
+					<div class="filter-input col-lg-12">
+						<label>Pesquisa: </label>
+						<input type="text" class="form-control" ng-model="filterText">
+					</div>
+				</div>
+			</form>
+		</div>
 
 		<br />
 	  <div class="table-responsive">
@@ -15,7 +25,7 @@
           <th class="col-md-1">Semestre</th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="examination in examinations | orderBy: 'ano' | filter:filterText">
+					<tr ng-repeat="examination in examinations | orderBy: ['-ano', '-semestre', 'nome'] | filter:filterText">
 						<td> <a href="#/concurso/detalhe/{{examination.id}}"><i class="glyphicon glyphicon-zoom-in"></a></i></td>
             <td ng-model="examination.nome">{{examination.nome}}</td>
             <td ng-model="examination.instituicao.sigla"><a href="#/instituicao/detalhe/{{examination.instituicao.id}}">{{examination.instituicao.sigla}}</a></td>
