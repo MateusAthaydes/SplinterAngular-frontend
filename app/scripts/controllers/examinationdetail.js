@@ -94,7 +94,7 @@ angular.module('splinterAngularFrontendApp')
         console.log($scope.question);
         questService.then(function (objSuccess){
           $scope.questionModal.close();
-          // $window.location.reload();
+          $window.location.reload();
         }, function(objError){
           console.log(objError);
           alert("Ops, houveram problemas.");
