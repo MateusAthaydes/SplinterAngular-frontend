@@ -31,8 +31,8 @@ angular.module('splinterAngularFrontendApp')
       numero_erros: null
     }
 
-    $rootScope.practice_result = [];
-
+    $scope.practice_result = [];
+    $scope.answers = [];
     $scope.alternatives = [];
 
     $scope.subjects = [];
@@ -64,10 +64,20 @@ angular.module('splinterAngularFrontendApp')
         $scope.checkbox_subjects[id] = true;
         $scope.subjectsId.push(id)
       }
+      $scope.initialize_chosen_subjects();
+    }
+
+    $scope.initialize_chosen_subjects = function () {
+      $rootScope.chosen_subjects = [];
+
+      angular.forEach($scope.subjects, function(sub, key){
+        if ($scope.subjectsId == sub.id){
+          $rootScope.chosen_subjects.push(sub);
+        }
+      });
     }
 
     $scope.practice_question = function(){
-      console.log("hey");
       var questService = questionService.getQuestionToPractice($scope.subjectsId, $scope.alternatives,
                                         $scope.question.descricao, $scope.question.id, $scope.question.id_area_conhecimento,
                                         $scope.question.id_concurso, $scope.question.numero_acertos,
@@ -84,6 +94,10 @@ angular.module('splinterAngularFrontendApp')
         $rootScope.alternatives = $scope.alternatives;
         $rootScope.subjectsId = $scope.subjectsId;
         $rootScope.subjects = $scope.subjects;
+
+        $rootScope.practice_questions = $scope.practice_questions;
+        $rootScope.answers = $scope.answers;
+
         if ($location.path() == "/praticar/questao"){
           $route.reload();
         } else {
@@ -103,53 +117,47 @@ angular.module('splinterAngularFrontendApp')
       $scope.alternatives = $rootScope.alternatives;
       $scope.subjectsId = $rootScope.subjectsId;
       $scope.subjects = $rootScope.subjects;
+      $scope.practice_questions = $rootScope.practice_questions;
+      $scope.answers = $rootScope.answers;
+
       $scope.alternative.id = null;
       $rootScope.question = null;
       $rootScope.alternatives = null;
       $rootScope.subjectsId = null;
       $rootScope.subjects = null;
 
+      $rootScope.answers = null;
+      $rootScope.practice_questions = null;
+
       $scope.question_answered = false;
     }
 
     $scope.answer_question = function(){
-      $scope.chosen_subjects = [];
-      console.log("hey");
-      console.log($scope.subjects);
-      console.log("hou");
-      console.log($scope.subjectsId);
-      console.log("question");
-      console.log($scope.question);
-
-      angular.forEach($scope.subjects, function(key, sub){
-        if ($scope.subjectsId == sub.id){
-          $scope.chosen_subjects.push(sub);
-        }
-      });
-
-      var user_answer;
+      console.log($scope.answers);
       var correct_attempts;
       var incorrect_attempts;
-      angular.forEach($scope.chosen_subjects, function(subject, index){
-        user_answer = {};
-        user_answer['subject_id'] = subject.id;
-        user_answer['subject_name'] = subject.nome;
-        angular.forEach($scope.alternatives, function(value, key){
-          if ($scope.alternative.id == value.id){
-            correct_attempts = [];
-            incorrect_attempts = [];
-            if(value.alternativa_correta){
-              correct_attempts.push(value.id);
-            } else {
-              incorrect_attempts.push(value.id);
-            }
-          }
-          user_answer['correct_attempts'] = correct_attempts;
-          user_answer['incorrect_attempts'] = incorrect_attempts;
-        });
-        $rootScope.practice_result.push(user_answer);
-      });
+      angular.forEach($rootScope.chosen_subjects, function(subject, index){
+        if ($scope.question.id_area_conhecimento == subject.id){
+          $scope.answer = {};
+          $scope.answer.question_subject_id = $scope.question.id_area_conhecimento;
 
+          angular.forEach($scope.alternatives, function(value, key){
+            if ($scope.alternative.id == value.id){
+              correct_attempts = [];
+              incorrect_attempts = [];
+              if(value.alternativa_correta){
+                correct_attempts.push(value.id);
+              } else {
+                incorrect_attempts.push(value.id);
+              }
+            }
+            $scope.answer.correct_attempts = correct_attempts;
+            $scope.answer.incorrect_attempts = incorrect_attempts;
+          });
+          console.log("ANSWER: " + $scope.answer);
+          $scope.answers.push($scope.answer);
+        }
+      });
       $scope.question_answered = true;
     }
 
@@ -161,6 +169,30 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.finish_practice = function(){
+      var user_answer;
+      $scope.hits = [];
+      $scope.misses = [];
+      console.log($scope.answers);
+      angular.forEach($rootScope.chosen_subjects, function(subject, index){
+        user_answer = {};
+        user_answer['subject_id'] = subject.id;
+        user_answer['subject_name'] = subject.nome;
+        angular.forEach($scope.answers, function(answer, key){
+          if (answer.question_subject_id == subject.id){
+            if (answer.correct_attempts.length > 0){
+              $scope.hits.push(answer.correct_attempts[0]);
+            } else{
+              $scope.misses.push(answer.incorrect_attempts[0]);
+            }
+          }
+          user_answer['hits'] = $scope.hits;
+          user_answer['misses'] = $scope.misses;
+        });
+        $scope.practice_result.push(user_answer);
+      });
+
+      $rootScope.practice_questions = $scope.practice_questions;
+      $rootScope.practice_result = $scope.practice_result;
       $location.path('/praticar/questao/resultados');
     }
 
@@ -171,36 +203,56 @@ angular.module('splinterAngularFrontendApp')
     */
 
     $scope.init_results = function(){
-      console.log($rootScope.practice_result);
+      // $scope.practice_questions = $rootScope.practice_questions;
+      // console.log("practice_questions: " + $scope.practice_questions);
+      $scope.practice_result = $rootScope.practice_result;
+      console.log("practice_result: " + $scope.practice_result);
+
       var labels = [];
-      angular.forEach($rootScope.practice_result, function(result, key){
+      var data_hits = [];
+      // var data_misses = [];
+      var data_total_misses_hits = [];
+      angular.forEach($scope.practice_result, function(result, key){
         labels.push(result.subject_name);
+        data_hits.push(result.hits.length);
+        data_total_misses_hits.push(result.misses.length + result.hits.length);
       });
       console.log(labels);
+
       var ctx = document.getElementById("barChart");
       var data = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+          labels: labels, //Areas de conhecimento
           datasets: [
               {
-                  label: "My First dataset",
-                  backgroundColor: "rgba(255,99,132,0.2)",
-                  borderColor: "rgba(255,99,132,1)",
+                  label: "Acertos",
+                  backgroundColor: "#5cb85c",
+                  borderColor: "#4cae4c",
                   borderWidth: 1,
-                  hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                  hoverBorderColor: "rgba(255,99,132,1)",
-                  data: [65, 59, 80, 81, 56, 55, 40],
+                  // hoverBackgroundColor: "rgba(107, 255, 99, 0.58)",
+                  // hoverBorderColor: "rgba(107, 255, 99, 0.9)",
+                  data: data_hits, //valor por área
+              },
+              {
+                label: "Total",
+                backgroundColor: "#337ab7",
+                borderColor: "#2e6da4",
+                borderWidth: 1,
+                // hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                // hoverBorderColor: "rgba(255,99,132,1)",
+                data: data_total_misses_hits
               }
           ]
       };
 
       var options = {
-          scale: {
-              reverse: true,
-              ticks: {
-                  beginAtZero: true
-              }
-          }
-      };
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
 
       var myBarChart = new Chart(ctx, {
           type: 'bar',
