@@ -120,7 +120,7 @@ angular.module('splinterAngularFrontendApp')
                                         id, id_area_conhecimento, id_concurso,
                                         numero_acertos, numero_erros){
         var deferred = $q.defer();
-        console.log(listSubjects);
+        console.log("listSubjects[getQuestionToPractice] - " + listSubjects);
         var resource = $resource(Url.Question + '?subjects=' + listSubjects);
         resource.get({
           alternativas: alternativas,

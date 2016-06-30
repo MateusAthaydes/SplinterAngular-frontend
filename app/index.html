@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/user.css">
     <link rel="stylesheet" href="styles/question.css">
     <link rel="stylesheet" href="styles/examination.css">
-    <link rel="stylesheet" href="/styles/practice_questions.css">
+    <link rel="stylesheet" href="styles/practice_questions.css">
     <!-- endbuild -->
   </head>
   <body ng-app="splinterAngularFrontendApp">
@@ -34,8 +34,8 @@
                         <li class="sidebar-brand"><a ng-href="#/">Splinter</a></li>
                         <li><a ng-href="#/"><i class="glyphicon glyphicon-home"></i><span>&nbsp; Início</span></a></li>
                         <li>
-                          <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Cadastros <b class="caret"></b></a>
-                          <ul id="demo" class="collapse">
+                          <a href="javascript:;" data-toggle="collapse" data-target="#cadastros"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Cadastros <b class="caret"></b></a>
+                          <ul id="cadastros" class="collapse">
                             <li><a ng-href="#/areas">Áreas de Conhecimento</a></li>
                             <li><a ng-href="#/cursos">Cursos</a></li>
                             <li><a ng-href="#/instituicoes">Instituições</a></li>
@@ -44,6 +44,12 @@
                           </ul>
                         </li>
                         <li><a href="#/praticar"><i class="glyphicon glyphicon-ok"></i>&nbsp; Praticar Questões</a></li>
+                        <li>
+                          <a href="javascript:;" data-toggle="collapse" data-target="#relatorios"><i class="glyphicon glyphicon-education"></i>&nbsp; Relatórios <b class="caret"></b></a>
+                          <ul id="relatorios" class="collapse">
+                            <li><a ng-href="#/relatorios/areas">Áreas de Conhecimento</a></li>
+                          </ul>
+                        </li>
                         <li><a ng-href="#">Contato</a></li>
                         <li><a ng-href="#/about">Sobre</a></li>
                     </ul>
@@ -77,6 +83,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/Chart.js/dist/Chart.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -91,6 +98,7 @@
     <script src="scripts/controllers/course.js"></script>
     <script src="scripts/controllers/coursedetail.js"></script>
     <script src="scripts/controllers/subject.js"></script>
+    <script src="scripts/controllers/reportsubject.js"></script>
     <script src="scripts/controllers/examination.js"></script>
     <script src="scripts/controllers/examinationdetail.js"></script>
     <script src="scripts/controllers/user.js"></script>
@@ -98,6 +106,7 @@
     <script src="scripts/services/institution.js"></script>
     <script src="scripts/services/course.js"></script>
     <script src="scripts/services/subject.js"></script>
+    <script src="scripts/services/reportsubject.js"></script>
     <script src="scripts/services/examination.js"></script>
     <script src="scripts/services/user.js"></script>
     <script src="scripts/services/question.js"></script>
