@@ -31,6 +31,8 @@ angular.module('splinterAngularFrontendApp')
       numero_erros: null
     }
 
+    $rootScope.practice_result = [];
+
     $scope.alternatives = [];
 
     $scope.subjects = [];
@@ -53,8 +55,6 @@ angular.module('splinterAngularFrontendApp')
           $scope.checkbox_subjects[key] = false;
         });
     }
-
-
 
     $scope.checkSubject = function(id){
       if ($scope.checkbox_subjects[id]){
@@ -83,6 +83,7 @@ angular.module('splinterAngularFrontendApp')
         $rootScope.question = $scope.question;
         $rootScope.alternatives = $scope.alternatives;
         $rootScope.subjectsId = $scope.subjectsId;
+        $rootScope.subjects = $scope.subjects;
         if ($location.path() == "/praticar/questao"){
           $route.reload();
         } else {
@@ -93,34 +94,62 @@ angular.module('splinterAngularFrontendApp')
     }
 
     /*
-    ==================================
-    QUESTION
-    ----------------------------------
+    =========================================================
+      QUESTION
+    ---------------------------------------------------------
     */
     $scope.reinitialize_scope = function(){
       $scope.question = $rootScope.question;
       $scope.alternatives = $rootScope.alternatives;
       $scope.subjectsId = $rootScope.subjectsId;
+      $scope.subjects = $rootScope.subjects;
       $scope.alternative.id = null;
       $rootScope.question = null;
       $rootScope.alternatives = null;
       $rootScope.subjectsId = null;
+      $rootScope.subjects = null;
 
       $scope.question_answered = false;
     }
 
     $scope.answer_question = function(){
-      angular.forEach($scope.alternatives, function(value, key){
-        if ($scope.alternative.id == value.id){
-          $scope.alternative = value;
-          if(value.alternativa_correta){
-            $rootScope.hits.push(value.id);
-          } else {
-            $rootScope.misses.push(value.id);
-          }
-          //Adicionar a questão que o cara acertou, para o relatório
+      $scope.chosen_subjects = [];
+      console.log("hey");
+      console.log($scope.subjects);
+      console.log("hou");
+      console.log($scope.subjectsId);
+      console.log("question");
+      console.log($scope.question);
+
+      angular.forEach($scope.subjects, function(key, sub){
+        if ($scope.subjectsId == sub.id){
+          $scope.chosen_subjects.push(sub);
         }
       });
+
+      var user_answer;
+      var correct_attempts;
+      var incorrect_attempts;
+      angular.forEach($scope.chosen_subjects, function(subject, index){
+        user_answer = {};
+        user_answer['subject_id'] = subject.id;
+        user_answer['subject_name'] = subject.nome;
+        angular.forEach($scope.alternatives, function(value, key){
+          if ($scope.alternative.id == value.id){
+            correct_attempts = [];
+            incorrect_attempts = [];
+            if(value.alternativa_correta){
+              correct_attempts.push(value.id);
+            } else {
+              incorrect_attempts.push(value.id);
+            }
+          }
+          user_answer['correct_attempts'] = correct_attempts;
+          user_answer['incorrect_attempts'] = incorrect_attempts;
+        });
+        $rootScope.practice_result.push(user_answer);
+      });
+
       $scope.question_answered = true;
     }
 
@@ -132,8 +161,51 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.finish_practice = function(){
-      //TO-DO
-      console.log("hey");
+      $location.path('/praticar/questao/resultados');
     }
 
+    /*
+    =========================================================
+      RESULTADOS
+    ---------------------------------------------------------
+    */
+
+    $scope.init_results = function(){
+      console.log($rootScope.practice_result);
+      var labels = [];
+      angular.forEach($rootScope.practice_result, function(result, key){
+        labels.push(result.subject_name);
+      });
+      console.log(labels);
+      var ctx = document.getElementById("barChart");
+      var data = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+          datasets: [
+              {
+                  label: "My First dataset",
+                  backgroundColor: "rgba(255,99,132,0.2)",
+                  borderColor: "rgba(255,99,132,1)",
+                  borderWidth: 1,
+                  hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                  hoverBorderColor: "rgba(255,99,132,1)",
+                  data: [65, 59, 80, 81, 56, 55, 40],
+              }
+          ]
+      };
+
+      var options = {
+          scale: {
+              reverse: true,
+              ticks: {
+                  beginAtZero: true
+              }
+          }
+      };
+
+      var myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+      });
+    }
   });
