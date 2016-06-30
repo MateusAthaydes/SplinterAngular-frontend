@@ -7,22 +7,23 @@
     &nbsp;
   <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-5">
       <label>Área de conhecimento: </label>
-      <span><b>{{question.id_area_conhecimento}}</b></span>
+      <span>{{question.area_conhecimento.nome}}</span>
     </div>
     <div class="col-md-4">
       <label>Número de acertos: </label>
       <span>{{question.numero_acertos}}</span>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label>Número de erros: </label>
-      <span><b>{{question.numero_erros}}</b></span>
+      <span>{{question.numero_erros}}</span>
     </div>
   </div>
-  <div class="row">
+  <br />
+  <div class="row" align='justify'>
     <div class="col-md-12">
-      <span>{{question.descricao}}</span>
+      <div ng-bind-html="getHtml(question.descricao)"></div>
     </div>
   </div>
   <br />
