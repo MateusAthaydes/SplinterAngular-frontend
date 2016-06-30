@@ -24,6 +24,7 @@ angular.module('splinterAngularFrontendApp')
 	.factory('BaseUrl', function(){
 		return {
 			mockApi: 'http://private-2d5a72-splinter.apiary-mock.com',
-			localApi: 'http://localhost:5000'
+			localApi: 'http://localhost:5000',
+			herokuApi: 'https://mestre-splinter.herokuapp.com'
 		}
 	});
