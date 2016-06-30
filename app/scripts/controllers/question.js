@@ -8,7 +8,7 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('QuestionCtrl', function ($scope, $window, $uibModal, $routeParams, questionService) {
+  .controller('QuestionCtrl', function ($scope, $window, $uibModal, $routeParams, $sce, questionService) {
     $scope.alternative = {
       id: null,
       id_questao: null,
@@ -123,5 +123,9 @@ angular.module('splinterAngularFrontendApp')
     $scope.closeConfirmationModal = function(){
       $scope.confirmationModal.dismiss('cancel');
     }
+
+    $scope.getHtml = function(html){
+        return $sce.trustAsHtml(html);
+    };
 
   });

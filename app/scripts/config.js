@@ -1,21 +1,21 @@
 angular.module('splinterAngularFrontendApp')
 	.factory('Url', function (BaseUrl){
 		return {
-			Institutions: BaseUrl.herokuApi + '/institutions',
-			Institution: BaseUrl.herokuApi + '/institution',
-			Courses: BaseUrl.herokuApi + '/courses',
-			Course: BaseUrl.herokuApi + '/course',
-			Subjects: BaseUrl.herokuApi + '/subjects',
-			Subject: BaseUrl.herokuApi + '/subject',
-			Examinations: BaseUrl.herokuApi + '/examinations',
-			Examination: BaseUrl.herokuApi + '/examination',
-			Users: BaseUrl.herokuApi + '/users',
-			User: BaseUrl.herokuApi + '/user',
-			Questions: BaseUrl.herokuApi + '/questions',
-			Question: BaseUrl.herokuApi + '/question',
-			QuestionsByExamination: BaseUrl.herokuApi + '/questions/examination',
-			Alternatives: BaseUrl.herokuApi + '/alternatives',
-			Alternative: BaseUrl.herokuApi + '/alternative'
+			Institutions: BaseUrl.localApi + '/institutions',
+			Institution: BaseUrl.localApi + '/institution',
+			Courses: BaseUrl.localApi + '/courses',
+			Course: BaseUrl.localApi + '/course',
+			Subjects: BaseUrl.localApi + '/subjects',
+			Subject: BaseUrl.localApi + '/subject',
+			Examinations: BaseUrl.localApi + '/examinations',
+			Examination: BaseUrl.localApi + '/examination',
+			Users: BaseUrl.localApi + '/users',
+			User: BaseUrl.localApi + '/user',
+			Questions: BaseUrl.localApi + '/questions',
+			Question: BaseUrl.localApi + '/question',
+			QuestionsByExamination: BaseUrl.localApi + '/questions/examination',
+			Alternatives: BaseUrl.localApi + '/alternatives',
+			Alternative: BaseUrl.localApi + '/alternative'
 		}
 	});
 

@@ -8,7 +8,7 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('ExaminationdetailCtrl', function ($scope, $routeParams, $window, $uibModal, examinationService, subjectService, questionService) {
+  .controller('ExaminationdetailCtrl', function ($scope, $routeParams, $window, $uibModal, $sce, examinationService, subjectService, questionService) {
     $scope.examination = {
       id: $routeParams.id,
       instituicao:  null,
@@ -101,6 +101,18 @@ angular.module('splinterAngularFrontendApp')
         })
       }
 
+      $scope.editQuestion = function(){
+        var questService = questionService.editQuestion($scope.question)
+        console.log($scope.question);
+        questService.then(function (objSuccess){
+          $scope.questionModal.close();
+          $window.location.reload();
+        }, function(objError){
+          console.log(objError);
+          alert("Ops, houveram problemas.");
+        });
+      }
+
       /*
       ----------------------------------------------------------------------------
       Modal configuration
@@ -129,4 +141,8 @@ angular.module('splinterAngularFrontendApp')
       $scope.closeModal = function(){
         $scope.questionModal.dismiss('cancel');
       }
+
+      $scope.getHtml = function(html){
+          return $sce.trustAsHtml(html);
+      };
   });

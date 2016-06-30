@@ -55,6 +55,18 @@ angular.module('splinterAngularFrontendApp')
           });
         return deferred.promise;
       },
+      editQuestion: function (question) {
+        var deferred = $q.defer();
+        var resource = Url.Question + '/' + question.id;
+        $http.put(resource, question)
+          .success(function (data, status, headers){
+            return deferred.resolve(data);
+          })
+          .error(function (data, status, headers){
+            return deferred.reject(data);
+          });
+          return deferred.promise;
+      },
       getAlternatives: function (id, id_questao, descricao, alternativa_correta){
         var deferred = $q.defer();
         var resource = $resource(Url.Question + '/alternatives/' + id_questao);
