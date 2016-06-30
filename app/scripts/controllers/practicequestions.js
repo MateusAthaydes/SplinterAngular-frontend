@@ -8,7 +8,7 @@
  * Controller of the splinterAngularFrontendApp
  */
 angular.module('splinterAngularFrontendApp')
-  .controller('PracticequestionsCtrl', function ($scope, $rootScope, $route, $location, $window, subjectService, questionService, Url) {
+  .controller('PracticequestionsCtrl', function ($scope, $rootScope, $route, $location, $window, $sce, subjectService, questionService, Url) {
 
     $scope.subject = {
       id: null,
@@ -71,7 +71,7 @@ angular.module('splinterAngularFrontendApp')
       $rootScope.chosen_subjects = [];
 
       angular.forEach($scope.subjects, function(sub, key){
-        if ($scope.subjectsId == sub.id){
+        if ($scope.subjectsId.indexOf(sub.id) >= 0){
           $rootScope.chosen_subjects.push(sub);
         }
       });
@@ -107,6 +107,10 @@ angular.module('splinterAngularFrontendApp')
       });
     }
 
+    $scope.getHtml = function(html){
+        return $sce.trustAsHtml(html);
+    };
+
     /*
     =========================================================
       QUESTION
@@ -133,7 +137,7 @@ angular.module('splinterAngularFrontendApp')
     }
 
     $scope.answer_question = function(){
-      console.log($scope.answers);
+      // console.log($scope.answers);
       var correct_attempts;
       var incorrect_attempts;
       angular.forEach($rootScope.chosen_subjects, function(subject, index){
@@ -154,7 +158,7 @@ angular.module('splinterAngularFrontendApp')
             $scope.answer.correct_attempts = correct_attempts;
             $scope.answer.incorrect_attempts = incorrect_attempts;
           });
-          console.log("ANSWER: " + $scope.answer);
+          // console.log("ANSWER: " + $scope.answer);
           $scope.answers.push($scope.answer);
         }
       });
@@ -170,23 +174,30 @@ angular.module('splinterAngularFrontendApp')
 
     $scope.finish_practice = function(){
       var user_answer;
-      $scope.hits = [];
-      $scope.misses = [];
-      console.log($scope.answers);
+      var user_hits;
+      var user_misses;
+      // console.log($scope.answers);
       angular.forEach($rootScope.chosen_subjects, function(subject, index){
         user_answer = {};
+        user_hits = [];
+        user_misses = [];
+
+
         user_answer['subject_id'] = subject.id;
         user_answer['subject_name'] = subject.nome;
         angular.forEach($scope.answers, function(answer, key){
+          // console.log(answer.question_subject_id);
+          // console.log(subject.id);
+
           if (answer.question_subject_id == subject.id){
             if (answer.correct_attempts.length > 0){
-              $scope.hits.push(answer.correct_attempts[0]);
+              user_hits.push(answer.correct_attempts[0]);
             } else{
-              $scope.misses.push(answer.incorrect_attempts[0]);
+              user_misses.push(answer.incorrect_attempts[0]);
             }
           }
-          user_answer['hits'] = $scope.hits;
-          user_answer['misses'] = $scope.misses;
+          user_answer['hits'] = user_hits;
+          user_answer['misses'] = user_misses;
         });
         $scope.practice_result.push(user_answer);
       });
@@ -206,7 +217,7 @@ angular.module('splinterAngularFrontendApp')
       // $scope.practice_questions = $rootScope.practice_questions;
       // console.log("practice_questions: " + $scope.practice_questions);
       $scope.practice_result = $rootScope.practice_result;
-      console.log("practice_result: " + $scope.practice_result);
+      // console.log("practice_result: " + $scope.practice_result);
 
       var labels = [];
       var data_hits = [];
@@ -217,7 +228,11 @@ angular.module('splinterAngularFrontendApp')
         data_hits.push(result.hits.length);
         data_total_misses_hits.push(result.misses.length + result.hits.length);
       });
-      console.log(labels);
+
+      // console.log($scope.practice_result);
+      // console.log(labels);
+      // console.log(data_hits);
+      // console.log(data_total_misses_hits);
 
       var ctx = document.getElementById("barChart");
       var data = {

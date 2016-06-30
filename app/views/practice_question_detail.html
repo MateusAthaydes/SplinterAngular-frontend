@@ -2,9 +2,7 @@
   <h1>Praticar Questões</h1>
   <div class="">
     <div class="question">
-      <div class="description">
-        {{question.descricao}}
-      </div>
+      <div class="description" ng-bind-html="getHtml(question.descricao)" align="justify"></div>
       <br>
       <div ng-repeat="alt in alternatives" class="alternatives">
         <div ng-class="{correct_answer: question_answered && alt.alternativa_correta}">
